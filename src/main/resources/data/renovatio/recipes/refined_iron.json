@@ -1,0 +1,9 @@
+{
+  "type": "renovatio:iron_blasting",
+  "ingredient": {
+    "item": "minecraft:iron_ore"
+  },
+  "result": "renovatio:refined_iron",
+  "experience": 0.7,
+  "cookingtime": 100
+}

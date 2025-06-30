@@ -1,0 +1,6 @@
+{
+    "parent": "item/handheld",
+    "textures": {
+        "layer0": "renovatio:item/refined_iron_cutlass"
+    }
+}

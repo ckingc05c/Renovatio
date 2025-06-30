@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "renovatio",
+  "version": "${version}",
+  "name": "Renovatio",
+  "description": "",
+  "authors": [],
+  "contact": {},
+  "license": "All-Rights-Reserved",
+  "icon": "assets/renovatio/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "fabric-datagen": [
+      "RenovatioMod.renovatio.client.RenovatioDataGenerator"
+    ],
+    "client": [
+      "RenovatioMod.renovatio.client.RenovatioClient"
+    ],
+    "main": [
+      "RenovatioMod.renovatio.Renovatio"
+    ]
+  },
+  "mixins": [
+    "renovatio.mixins.json",
+    {
+      "config": "renovatio.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}",
+    "reach-entity-attributes": "*"
+
+  }
+}
