@@ -1,32 +1,21 @@
 package RenovatioMod.renovatio.registry;
 
+import RenovatioMod.renovatio.Renovatio;
 import RenovatioMod.renovatio.recipe.IronBlastingRecipe;
 import RenovatioMod.renovatio.recipe.IronBlastingRecipeSerializer;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.RecipeType;
-import net.minecraft.util.Identifier;
+import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
-import net.minecraft.registry.Registries; // <-- note this import
-
-import net.minecraft.registry.RegistryKeys;
+import net.minecraft.util.Identifier;
 
 public class ModRecipeTypes {
 
-    public static final RecipeType<IronBlastingRecipe> IRON_BLASTING =
-            Registry.register(
-                    Registries.RECIPE_TYPE, // use Registries, not RegistryKeys
-                    new Identifier("renovatio", "iron_blasting"),
-                    new RecipeType<>() {}
-            );
-
-    public static final RecipeSerializer<IronBlastingRecipe> IRON_BLASTING_SERIALIZER =
-            Registry.register(
-                    Registries.RECIPE_SERIALIZER, // use Registries here too
-                    IronBlastingRecipeSerializer.ID,
-                    IronBlastingRecipeSerializer.INSTANCE
-            );
+    public static RecipeType<IronBlastingRecipe> IRON_BLASTING;
+    public static RecipeSerializer<IronBlastingRecipe> IRON_BLASTING_SERIALIZER;
 
     public static void register() {
-        // Called on mod init
+        IRON_BLASTING = Registry.register(Registries.RECIPE_TYPE, new Identifier(Renovatio.MOD_ID, "iron_blasting"), new RecipeType<IronBlastingRecipe>() {});
+        IRON_BLASTING_SERIALIZER = Registry.register(Registries.RECIPE_SERIALIZER, new Identifier(Renovatio.MOD_ID, "iron_blasting"), new IronBlastingRecipeSerializer(100));
     }
 }

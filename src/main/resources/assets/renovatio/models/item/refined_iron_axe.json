@@ -1,6 +1,6 @@
 {
     "parent": "item/handheld",
     "textures": {
-        "layer0": "renovatio:item/refined_iron_axe"
+        "layer0": "renovatio:item/refined_iron/refined_iron_axe"
     }
 }

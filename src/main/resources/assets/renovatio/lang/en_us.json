@@ -9,6 +9,19 @@
   "item.renovatio.refined_iron_battleaxe": "Refined Iron Battleaxe",
   "item.renovatio.refined_iron_hoe": "Refined Iron Hoe",
   "item.renovatio.refined_iron_scythe": "Refined Iron Scythe",
-  "container.renovatio.iron_blast_furnace": "Iron Blast Furnace"
-
+  "item.renovatio.refined_iron_ingot": "Refined Iron Ingot",
+  "container.renovatio.iron_blast_furnace": "Iron Blast Furnace",
+  "block.renovatio.iron_blast_furnace": "Iron Blast Furnace",
+  "item.renovatio.copper_sword": "Copper Sword",
+  "item.renovatio.copper_longsword": "Copper Longsword",
+  "item.renovatio.copper_shortsword": "Copper Shortsword",
+  "item.renovatio.copper_claymore": "Copper Claymore",
+  "item.renovatio.copper_cutlass": "Copper Cutlass",
+  "item.renovatio.copper_dagger": "Copper Dagger",
+  "item.renovatio.copper_axe": "Copper Axe",
+  "item.renovatio.copper_battleaxe": "Copper Battleaxe",
+  "item.renovatio.copper_hoe": "Copper Hoe",
+  "item.renovatio.copper_scythe": "Copper Scythe",
+  "item.renovatio.copper_pickaxe": "Copper Pickaxe",
+  "item.renovatio.copper_shovel": "Copper Shovel"
 }

@@ -5,33 +5,33 @@ import RenovatioMod.renovatio.boss.OminousBossHandler;
 import RenovatioMod.renovatio.effects.MobStageBuffHandler;
 import RenovatioMod.renovatio.event.WorldEventHandler;
 import RenovatioMod.renovatio.item.ModItems;
-import RenovatioMod.renovatio.item.ModToolMaterials;
 import RenovatioMod.renovatio.registry.ModBlockEntities;
+import RenovatioMod.renovatio.registry.ModRecipeTypes;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import RenovatioMod.renovatio.command.StageCommand;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.fabricmc.fabric.api.event.player.UseEntityCallback;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.boss.WitherEntity;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.mob.ElderGuardianEntity;
-import net.minecraft.item.Items;
-import net.minecraft.item.PickaxeItem;
-import net.minecraft.item.SwordItem;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.Identifier;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Renovatio implements ModInitializer {
+    public static final String MOD_ID = "renovatio";
+    public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
     @Override
     public void onInitialize() {
-        ModItems.registerItems();
+        // Corrected Order: Blocks first, then Items
         ModBlocks.registerModBlocks();
+        ModItems.registerItems();
+
         ModBlockEntities.register();
+        ModRecipeTypes.register(); // Register your custom recipe type
         MobStageBuffHandler.register();
         WorldEventHandler.register();
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
@@ -54,7 +54,5 @@ public class Renovatio implements ModInitializer {
                 }
             }
         });
-
-
     }
 }

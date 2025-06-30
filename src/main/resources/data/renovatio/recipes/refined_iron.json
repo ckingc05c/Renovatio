@@ -1,9 +1,9 @@
 {
   "type": "renovatio:iron_blasting",
   "ingredient": {
-    "item": "minecraft:iron_ore"
+    "item": "minecraft:iron_ingot"
   },
-  "result": "renovatio:refined_iron",
+  "result": "renovatio:refined_iron_ingot",
   "experience": 0.7,
   "cookingtime": 100
 }

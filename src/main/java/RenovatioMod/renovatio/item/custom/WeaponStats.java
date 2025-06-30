@@ -4,7 +4,7 @@ public enum WeaponStats {
     SWORD(3, 1.6f, 0.0f, 0.0f),
     LONG_SWORD(4, 1.4f, 0.25f, 0.25f),
     SHORT_SWORD(2, 2.0f, -0.25f, -0.10f),
-    CLAYMORE(5, 1.2f, 0.5f, 0.50f),
+    CLAYMORE(5, 1.0f, 0.75f, 0.50f),
     CUTLASS(3, 1.5f, 0.0f, 0.15f),
     DAGGER(1.5f, 2.4f, -0.5f, -0.25f),
     AXE(5, 1.0f, 0.0f, 0.0f),
