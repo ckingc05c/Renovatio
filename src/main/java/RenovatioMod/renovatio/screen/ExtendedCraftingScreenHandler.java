@@ -6,44 +6,52 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
+import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.screen.slot.Slot;
 
 public class ExtendedCraftingScreenHandler extends ScreenHandler {
     private final Inventory inventory;
 
+    // This is the client-side constructor. It calls the main constructor below.
     public ExtendedCraftingScreenHandler(int syncId, PlayerInventory playerInventory) {
-        this(syncId, playerInventory, new SimpleInventory(26));
+        // We pass our registered ScreenHandlerType here instead of 'this'.
+        this(ModScreenHandlers.EXTENDED_CRAFTING_TABLE_SCREEN_HANDLER, syncId, playerInventory, new SimpleInventory(26));
     }
 
-    public ExtendedCraftingScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory) {
-        super(ModScreenHandlers.EXTENDED_CRAFTING_TABLE_SCREEN_HANDLER, syncId);
+    public ExtendedCraftingScreenHandler(ScreenHandlerType<?> type, int syncId, PlayerInventory playerInventory, Inventory inventory) {
+        super(type, syncId);
         checkSize(inventory, 26);
         this.inventory = inventory;
         inventory.onOpen(playerInventory.player);
-
+        int gapBetweenCraftingAndInventory = 34;
         int m;
         int l;
 
-        // Crafting Grid Slots (5x5)
+        int gridX = 48;
+        int gridY = 20;
+
+        // 5x5 Crafting Grid
         for (m = 0; m < 5; ++m) {
             for (l = 0; l < 5; ++l) {
-                this.addSlot(new Slot(inventory, l + m * 5, 30 + l * 18, 20 + m * 18)); // Adjusted X and Y
+                this.addSlot(new Slot(inventory, l + m * 5, gridX + l * 18, gridY + m * 18));
             }
         }
 
-        // Crafting Result Slot - Positioned to the right
-        this.addSlot(new Slot(inventory, 25, 134, 44)); // Adjusted X and Y
+        // Result Slot - Y is now gridY + (2 * 18) to align with the 3rd row
+        this.addSlot(new Slot(inventory, 25, 178, gridY + 2 * 18));
 
-        // Player Inventory Slots
+        // Player Inventory - Pushed down to create a gap
+        int playerInvY = 122;
         for (m = 0; m < 3; ++m) {
             for (l = 0; l < 9; ++l) {
-                this.addSlot(new Slot(playerInventory, l + m * 9 + 9, 8 + l * 18, 116 + m * 18)); // Adjusted Y
+                this.addSlot(new Slot(playerInventory, l + m * 9 + 9, 48 + l * 18, playerInvY + m * 18));
             }
         }
 
-        // Player Hotbar Slots
+        // Player Hotbar - Pushed down to create a gap
+        int hotbarY = 180;
         for (m = 0; m < 9; ++m) {
-            this.addSlot(new Slot(playerInventory, m, 8 + m * 18, 174)); // Adjusted Y
+            this.addSlot(new Slot(playerInventory, m, 48 + m * 18, hotbarY));
         }
     }
 

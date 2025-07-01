@@ -2,6 +2,7 @@ package RenovatioMod.renovatio.block.functional;
 
 import RenovatioMod.renovatio.registry.ModBlockEntities;
 import RenovatioMod.renovatio.screen.ExtendedCraftingScreenHandler;
+import RenovatioMod.renovatio.screen.ModScreenHandlers;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -30,10 +31,12 @@ public class ExtendedCraftingTableBlockEntity extends BlockEntity implements Nam
         return Text.translatable("container.renovatio.extended_crafting");
     }
 
+
     @Nullable
     @Override
     public ScreenHandler createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
-        return new ExtendedCraftingScreenHandler(syncId, playerInventory, new SimpleInventory(this.inventory.size()));
+        // We now pass the ScreenHandlerType to the constructor
+        return new ExtendedCraftingScreenHandler(ModScreenHandlers.EXTENDED_CRAFTING_TABLE_SCREEN_HANDLER, syncId, playerInventory, new SimpleInventory(this.inventory.size()));
     }
 
     // Corrected signature for 1.20.1

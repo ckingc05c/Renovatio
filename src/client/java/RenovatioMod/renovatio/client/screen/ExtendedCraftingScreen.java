@@ -15,17 +15,19 @@ public class ExtendedCraftingScreen extends HandledScreen<ExtendedCraftingScreen
 
     public ExtendedCraftingScreen(ExtendedCraftingScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
-        // Set the new dimensions to match your resized 256x256 texture
         this.backgroundWidth = 256;
         this.backgroundHeight = 256;
-        this.playerInventoryTitleY = this.backgroundHeight - 94;
+
+        // Set the "Inventory" text Y-position to fit in our new gap
+        this.playerInventoryTitleY = 111;
+        this.playerInventoryTitleX = 48;
     }
 
     @Override
     protected void init() {
         super.init();
         titleX = (backgroundWidth - textRenderer.getWidth(title)) / 2;
-        titleY = 6;
+        titleY = 8; // A bit more space from the top
     }
 
     @Override

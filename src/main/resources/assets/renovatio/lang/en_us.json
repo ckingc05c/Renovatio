@@ -23,5 +23,6 @@
   "item.renovatio.copper_hoe": "Copper Hoe",
   "item.renovatio.copper_scythe": "Copper Scythe",
   "item.renovatio.copper_pickaxe": "Copper Pickaxe",
-  "item.renovatio.copper_shovel": "Copper Shovel"
+  "item.renovatio.copper_shovel": "Copper Shovel",
+  "container.renovatio.extended_crafting": "Extending Crafting"
 }
