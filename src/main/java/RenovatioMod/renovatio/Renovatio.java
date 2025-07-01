@@ -7,6 +7,7 @@ import RenovatioMod.renovatio.event.WorldEventHandler;
 import RenovatioMod.renovatio.item.ModItems;
 import RenovatioMod.renovatio.registry.ModBlockEntities;
 import RenovatioMod.renovatio.registry.ModRecipeTypes;
+import RenovatioMod.renovatio.screen.ModScreenHandlers;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import RenovatioMod.renovatio.command.StageCommand;
@@ -29,6 +30,7 @@ public class Renovatio implements ModInitializer {
         // Corrected Order: Blocks first, then Items
         ModBlocks.registerModBlocks();
         ModItems.registerItems();
+        ModScreenHandlers.register(); // Add this line
 
         ModBlockEntities.register();
         ModRecipeTypes.register(); // Register your custom recipe type
