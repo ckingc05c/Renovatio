@@ -9,10 +9,13 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.damage.DamageType;
 import net.minecraft.entity.damage.DamageTypes;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.server.world.ServerWorld;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
@@ -21,6 +24,10 @@ import java.util.Set;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityDamageMixin {
+
+    // Shadow methods to access vanilla functionality safely
+    @Shadow public abstract boolean hasStatusEffect(net.minecraft.entity.effect.StatusEffect effect);
+    @Shadow public abstract StatusEffectInstance getStatusEffect(net.minecraft.entity.effect.StatusEffect effect);
 
     @Unique
     private static final Set<RegistryKey<DamageType>> ENVIRONMENTAL_DAMAGE_TYPES = ImmutableSet.of(
@@ -45,7 +52,6 @@ public abstract class LivingEntityDamageMixin {
             DamageTypes.WITHER_SKULL, DamageTypes.FIREWORKS, DamageTypes.MOB_PROJECTILE
     );
 
-    // Using THORNS here for the "physical" category as requested.
     @Unique
     private static final Set<RegistryKey<DamageType>> PHYSICAL_DAMAGE_TYPES = ImmutableSet.of(
             DamageTypes.THORNS
@@ -55,45 +61,45 @@ public abstract class LivingEntityDamageMixin {
     private float modifyDamage(float amount, DamageSource source) {
         LivingEntity target = (LivingEntity) (Object) this;
 
-        // We only scale damage against players on the server.
         if (!(target instanceof PlayerEntity player) || target.getWorld().isClient()) {
             return amount;
         }
 
+        // --- STAGE-BASED DAMAGE SCALING ---
         ServerWorld world = (ServerWorld) player.getWorld();
         Stage stage = StageManager.get(world).getStage();
-        Entity attacker = source.getAttacker();
         double multiplier = 1.0;
 
-        // Get the registry key for the current damage source to check against our sets.
         RegistryKey<DamageType> damageTypeKey = source.getTypeRegistryEntry().getKey().orElse(null);
-        if (damageTypeKey == null) {
-            return amount; // Should not happen, but a good safe-check.
+        if (damageTypeKey != null) {
+            if (ENVIRONMENTAL_DAMAGE_TYPES.contains(damageTypeKey)) {
+                multiplier = StageEffects.getEnvironmentalDamageModifier(stage);
+            } else if (MAGIC_DAMAGE_TYPES.contains(damageTypeKey)) {
+                multiplier = StageEffects.getMagicDamageModifier(stage);
+            } else if (PROJECTILE_DAMAGE_TYPES.contains(damageTypeKey)) {
+                multiplier = StageEffects.getProjectileDamageModifier(stage);
+            } else if (PHYSICAL_DAMAGE_TYPES.contains(damageTypeKey)) {
+                multiplier = StageEffects.getMeleeDamageModifier(stage);
+            } else if (damageTypeKey.equals(DamageTypes.PLAYER_EXPLOSION) || damageTypeKey.equals(DamageTypes.EXPLOSION)) {
+                multiplier = StageEffects.getExplosionDamageModifier(stage);
+            }
         }
 
-        // --- Logic for all Damage Types ---
-        if (ENVIRONMENTAL_DAMAGE_TYPES.contains(damageTypeKey)) {
-            multiplier = StageEffects.getEnvironmentalDamageModifier(stage);
-        } else if (MAGIC_DAMAGE_TYPES.contains(damageTypeKey)) {
-            multiplier = StageEffects.getMagicDamageModifier(stage);
-        } else if (PROJECTILE_DAMAGE_TYPES.contains(damageTypeKey)) {
-            multiplier = StageEffects.getProjectileDamageModifier(stage);
-        } else if (PHYSICAL_DAMAGE_TYPES.contains(damageTypeKey)) {
-            // Thorns uses the melee modifier as requested.
-            multiplier = StageEffects.getMeleeDamageModifier(stage);
-        } else if (source.isOf(DamageTypes.EXPLOSION)) {
-            multiplier = StageEffects.getExplosionDamageModifier(stage);
-        } else if (attacker instanceof LivingEntity && !(attacker instanceof PlayerEntity)) {
-            // This is our catch-all for any other direct mob attacks that are not
-            // explosions, projectiles, or magic. This is effectively the melee category.
-            // We do NOT use StageEffects.getMeleeDamageModifier(stage) here because
-            // that damage is already scaled up via the mob's attributes. This is now a no-op.
-            return amount;
-        } else {
-            // If it doesn't match any of our categories, don't modify the damage.
-            return amount;
+        // We don't scale melee damage here, as it's handled by attributes.
+        // The check for `attacker instanceof LivingEntity` is no longer needed here
+        // as the damage types cover those cases.
+
+        float stageModifiedAmount = amount * (float) multiplier;
+
+        // --- RESISTANCE CALCULATION ---
+        // This is applied *after* the stage-based scaling.
+        if (this.hasStatusEffect(StatusEffects.RESISTANCE)) {
+            int amplifier = this.getStatusEffect(StatusEffects.RESISTANCE).getAmplifier();
+            float reduction = (amplifier + 1) * 0.15f; // Your new 15% formula
+            reduction = Math.min(reduction, 1.0f); // Cap at 100%
+            return stageModifiedAmount * (1.0f - reduction);
         }
 
-        return (float) (amount * multiplier);
+        return stageModifiedAmount;
     }
 }
