@@ -2,7 +2,6 @@ package RenovatioMod.renovatio.effects;
 
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.mob.Monster;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.server.world.ServerWorld;
@@ -33,7 +32,7 @@ public class MobStageBuffHandler {
             Stage stage = StageManager.get(world).getStage();
 
             double healthMult = StageEffects.getHealthModifier(stage);
-            double damageMult = StageEffects.getDamageModifier(stage);
+            double damageMult = StageEffects.getMeleeDamageModifier(stage);
             double speedMult = StageEffects.getSpeedModifier(stage);
             double aggroMult = StageEffects.getAggroModifier(stage);
 

@@ -25,6 +25,8 @@ public class StageManager extends PersistentState {
 
     private Stage currentStage = Stage.NOVICE;
 
+    private boolean setStage = false;
+
     public StageManager() {
         // Default constructor for new data
     }
@@ -36,6 +38,7 @@ public class StageManager extends PersistentState {
     public void setStage(Stage stage) {
         this.currentStage = stage;
         System.out.println("[Renovatio] Stage set to " + currentStage.getDisplayName());
+        setStage = true;
         markDirty(); // Tell Minecraft to save this state
     }
 

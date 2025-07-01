@@ -38,6 +38,9 @@ public class WeaponAttributeTooltip {
                 } else if (lower.contains("attack range") || lower.contains("attack reach")) {
                     lines.remove(i);
                     i--;
+                } else if (lower.contains("reach")) {
+                    lines.remove(i);
+                    i--;
                 } else if (lower.contains("crit damage")) {
                     lines.remove(i);
                     i--;

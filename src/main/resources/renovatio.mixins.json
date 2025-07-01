@@ -4,7 +4,11 @@
   "package": "RenovatioMod.renovatio.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "PersistentProjectileEntityMixin",
+    "CreeperEntityAccessor",
+    "CreeperEntityMixin",
+    "StatusEffectMixin",
+    "ItemAccessor",
+    "LivingEntityDamageMixin",
     "ToolMaterialsMixin"
   ],
   "injectors": {

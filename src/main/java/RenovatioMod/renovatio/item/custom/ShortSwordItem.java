@@ -43,6 +43,10 @@ public class ShortSwordItem extends SwordItem {
         builder.put(ReachEntityAttributes.ATTACK_RANGE,
                 new EntityAttributeModifier(REACH_MODIFIER_ID, "Weapon reach bonus",
                         STATS.getReachOffset(), EntityAttributeModifier.Operation.ADDITION));
+        // Reach bonus
+        builder.put(ReachEntityAttributes.REACH,
+                new EntityAttributeModifier(REACH_MODIFIER_ID, "Weapon reach bonus",
+                        STATS.getReachOffset(), EntityAttributeModifier.Operation.ADDITION));
 
         // Optional: Critical bonus damage
         builder.put(AdditionalEntityAttributes.CRITICAL_BONUS_DAMAGE,

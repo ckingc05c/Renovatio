@@ -133,10 +133,8 @@ public class ModItems {
             new FabricItemSettings()
     );
 
-    public static final Item COPPER_AXE = new AxeItem(
+    public static final Item COPPER_AXE = new CustomAxeItem(
             ModToolMaterials.COPPER,
-            4,  // attack damage
-            -2.8f,  // attack speed
             new FabricItemSettings()
     );
 
@@ -145,10 +143,8 @@ public class ModItems {
             new FabricItemSettings()
     );
 
-    public static final Item COPPER_HOE = new HoeItem(
+    public static final Item COPPER_HOE = new CustomHoeItem(
             ModToolMaterials.COPPER,
-            0,  // attack damage
-            -3.0f,  // attack speed
             new FabricItemSettings()
     );
 

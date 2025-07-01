@@ -9,7 +9,7 @@ public enum WeaponStats {
     DAGGER(1.5f, 2.4f, -0.5f, -0.25f),
     AXE(5, 1.0f, 0.0f, 0.0f),
     BATTLE_AXE(7, 0.85f, 0.5f, 0.25f),
-    HOE(0, 2.5f, -0.5f, 0.15f),
+    HOE(0, 2.5f, 0.0f, 0.0f),
     SCYTHE(3, 1.2f, 1.0f, 0.30f),
     LANCE(7, 0.5f, 1.0f, 0.25f),      // Added based on table
     MACE(7, 0.5f, 0.75f, 1.0f);      // Added based on table
