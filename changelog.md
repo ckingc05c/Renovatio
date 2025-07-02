@@ -1,4 +1,10 @@
 # Changelog
+## [1.0.5.45] - 2025-07-01
+### Changed
+- Made **Strength** and **Weakness** effects multiplicative:
+    - **Strength** now increases attack damage by **+30% per level**.
+    - **Weakness** now reduces attack damage by **-40% per level**.
+- **Strength** now also affects **ranged attacks**, not just melee.
 
 ## [1.0.5.44] - 2025-07-01
 ### Fixed

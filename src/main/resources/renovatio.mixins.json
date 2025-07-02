@@ -6,9 +6,11 @@
   "mixins": [
     "CreeperEntityAccessor",
     "CreeperEntityMixin",
-    "StatusEffectMixin",
+    "DamageModifierStatusEffectMixin",
     "ItemAccessor",
     "LivingEntityDamageMixin",
+    "StatusEffectAccessor",
+    "StatusEffectMixin",
     "ToolMaterialsMixin"
   ],
   "injectors": {

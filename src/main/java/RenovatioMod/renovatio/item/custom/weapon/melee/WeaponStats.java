@@ -1,4 +1,4 @@
-package RenovatioMod.renovatio.item.custom;
+package RenovatioMod.renovatio.item.custom.weapon.melee;
 
 public enum WeaponStats {
     SWORD(3, 1.6f, 0.0f, 0.0f),

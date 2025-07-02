@@ -76,7 +76,7 @@ public class WeaponAttributeTooltip {
                 int critPercent = (int) Math.round((BASE_CRIT_DAMAGE + totalCritBonus) * 100.0);
                 critDamageLine = Text.literal(" " + critPercent + "% Crit Damage").formatted(Formatting.DARK_GREEN);
             } else {
-                critDamageLine = Text.literal(" 150% Crit Damage").formatted(Formatting.DARK_GREEN);
+                critDamageLine = Text.literal(" 150% Falling Crit Damage").formatted(Formatting.DARK_GREEN);
             }
 
             // Re-insert in correct order

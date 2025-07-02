@@ -1,7 +1,6 @@
 package RenovatioMod.renovatio.item;
 
-import RenovatioMod.renovatio.block.functional.ModBlocks;
-import RenovatioMod.renovatio.item.custom.*;
+import RenovatioMod.renovatio.item.custom.weapon.melee.*;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.item.*;
 import net.minecraft.util.Identifier;

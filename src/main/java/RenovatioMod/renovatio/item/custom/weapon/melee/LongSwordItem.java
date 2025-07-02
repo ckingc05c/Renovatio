@@ -1,4 +1,4 @@
-package RenovatioMod.renovatio.item.custom;
+package RenovatioMod.renovatio.item.custom.weapon.melee;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
@@ -13,15 +13,15 @@ import net.minecraft.item.ToolMaterial;
 
 import java.util.UUID;
 
-public class CutlassSwordItem extends SwordItem {
+public class LongSwordItem extends SwordItem {
     private final Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers;
-    private static final WeaponStats STATS = WeaponStats.CUTLASS;
+    private static final WeaponStats STATS = WeaponStats.LONG_SWORD;
 
     // Static UUIDs per attribute type
     private static final UUID REACH_MODIFIER_ID = UUID.fromString("aaaa1111-2222-3333-4444-555566667777");
     private static final UUID CRIT_MODIFIER_ID = UUID.fromString("bbbb1111-2222-3333-4444-555566667777");
 
-    public CutlassSwordItem(ToolMaterial material, Settings settings) {
+    public LongSwordItem(ToolMaterial material, Settings settings) {
         super(material, (int) STATS.getAttackDamageBonus(), STATS.getTotalAttackSpeed(), settings);
 
         ImmutableMultimap.Builder<EntityAttribute, EntityAttributeModifier> builder = ImmutableMultimap.builder();
@@ -58,4 +58,6 @@ public class CutlassSwordItem extends SwordItem {
     public Multimap<EntityAttribute, EntityAttributeModifier> getAttributeModifiers(EquipmentSlot slot) {
         return slot == EquipmentSlot.MAINHAND ? this.attributeModifiers : super.getAttributeModifiers(slot);
     }
+
+
 }
