@@ -77,32 +77,14 @@ public class StageEffects {
             case ASCENDANT -> 6;
         };
     }
-    public static double getCreeperFuseTime(Stage stage) {
-        return switch (stage) {
-            case NOVICE -> 2.0;
-            case NORMAL -> 1.5;
-            case ADEPT -> 1.375;
-            case ADVANCED -> 1.25;
-            case ELITE -> 1.125;
-            case VETERAN -> 1.0;
-            case EXPERT -> 0.875;
-            case CHAMPION -> 0.75;
-            case MASTER -> 0.625;
-            case ASCENDANT -> 0.5;
-        };
-    }
+
 
     public static int getGhastFireballStrength(Stage stage) {
         return switch (stage) {
-            case NOVICE -> 0;
-            case NORMAL -> 1;
-            case ADEPT -> 1;
-            case ADVANCED -> 2;
-            case ELITE -> 2;
-            case VETERAN -> 3;
-            case EXPERT -> 3;
-            case CHAMPION -> 4;
-            case MASTER -> 4;
+            case NOVICE, NORMAL, ADEPT -> 1;
+            case ADVANCED, ELITE -> 2;
+            case VETERAN, EXPERT -> 3;
+            case CHAMPION, MASTER -> 4;
             case ASCENDANT -> 5;
         };
     }
@@ -122,7 +104,7 @@ public class StageEffects {
         };
     }
 
-    public static double getWitchPotionDurationModifier(Stage stage) {
+    public static double getNegativePotionDurationModifier(Stage stage) {
         return switch (stage) {
             case NOVICE -> 0.80;
             case NORMAL -> 1.00;
@@ -137,39 +119,10 @@ public class StageEffects {
         };
     }
 
-    public static int getWitchPotionAmplifier(Stage stage) {
-        return switch (stage) {
-            case NOVICE, NORMAL, ADEPT -> 0;
-            case ADVANCED, ELITE, VETERAN -> 1;
-            case EXPERT, CHAMPION, MASTER -> 2;
-            case ASCENDANT -> 3;
-        };
 
-    }
-    public static double getPotionDurationModifier(Stage stage) {
-        return switch (stage) {
-            case NOVICE -> 0.80;
-            case NORMAL -> 1.00;
-            case ADEPT -> 1.25;
-            case ADVANCED -> 1.50;
-            case ELITE -> 1.625;
-            case VETERAN -> 1.75;
-            case EXPERT -> 1.875;
-            case CHAMPION -> 2.00;
-            case MASTER -> 2.50;
-            case ASCENDANT -> 3.00;
-        };
-    }
 
-    public static int getPotionAmplifier(Stage stage) {
-        return switch (stage) {
-            case NOVICE, NORMAL, ADEPT -> 0;
-            case ADVANCED, ELITE, VETERAN -> 1;
-            case EXPERT, CHAMPION, MASTER -> 2;
-            case ASCENDANT -> 3;
-        };
 
-    }
+
     public static double getEnvironmentalDamageModifier(Stage stage) {
         return switch (stage) {
             case NOVICE -> 0.85;

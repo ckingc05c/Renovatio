@@ -1,6 +1,6 @@
 package RenovatioMod.renovatio;
 
-import RenovatioMod.renovatio.block.functional.ModBlocks;
+import RenovatioMod.renovatio.block.ModBlocks;
 import RenovatioMod.renovatio.boss.OminousBossHandler;
 import RenovatioMod.renovatio.effects.MobStageBuffHandler;
 import RenovatioMod.renovatio.event.AttributeEffectHandler;

@@ -1,6 +1,6 @@
 package RenovatioMod.renovatio.event;
 
-import RenovatioMod.renovatio.mixin.StatusEffectAccessor;
+import RenovatioMod.renovatio.mixin.effect.StatusEffectAccessor;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;

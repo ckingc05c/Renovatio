@@ -26,6 +26,8 @@ fabricApi {
         client = true
     }
 }
+def localFakerLib = findProject(':FakerLib') != null
+def localAttributes = findProject(':ZenithAttributes') != null
 
 repositories {
     // Add repositories to retrieve artifacts from in here.
@@ -38,6 +40,7 @@ repositories {
         content {
             includeGroup "com.jamieswhiteshirt"
         }
+    mavenLocal()
     }
     exclusiveContent {
         forRepository {
@@ -68,7 +71,6 @@ dependencies {
     modImplementation include("maven.modrinth:AdditionalEntityAttributes:1.7.6+1.20.1")
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
     modImplementation "maven.modrinth:ranged-weapon-api:1.1.4+1.20.1"
-
 }
 
 processResources {

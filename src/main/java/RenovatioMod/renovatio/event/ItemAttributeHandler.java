@@ -1,6 +1,6 @@
 package RenovatioMod.renovatio.event;
 
-import RenovatioMod.renovatio.mixin.ItemAccessor;
+import RenovatioMod.renovatio.mixin.item.ItemAccessor;
 import com.google.common.collect.Multimap;
 import net.fabricmc.fabric.api.item.v1.ModifyItemAttributeModifiersCallback;
 import net.minecraft.entity.EquipmentSlot;
@@ -24,7 +24,7 @@ public class ItemAttributeHandler {
             return;
         }
 
-        if (stack.getItem() instanceof AxeItem) {
+        if (stack.getItem().getClass() == AxeItem.class ) {
             // Remove the default attributes
             attributeModifiers.removeAll(EntityAttributes.GENERIC_ATTACK_DAMAGE);
             attributeModifiers.removeAll(EntityAttributes.GENERIC_ATTACK_SPEED);
@@ -38,7 +38,7 @@ public class ItemAttributeHandler {
             attributeModifiers.put(EntityAttributes.GENERIC_ATTACK_SPEED,
                     new EntityAttributeModifier(ItemAccessor.getAttackSpeedModifierId(), "Weapon modifier", -3.0, EntityAttributeModifier.Operation.ADDITION));
 
-        } else if (stack.getItem() instanceof HoeItem) {
+        } else if (stack.getItem().getClass() == HoeItem.class) {
             // Remove the default attributes
             attributeModifiers.removeAll(EntityAttributes.GENERIC_ATTACK_DAMAGE);
             attributeModifiers.removeAll(EntityAttributes.GENERIC_ATTACK_SPEED);
