@@ -22,10 +22,10 @@ public class StageManager extends PersistentState {
 
     private static final String KEY = "renovatio_stage";
     private static final String NBT_STAGE = "global_stage";
+    private static final String NBT_LOCKED = "isLocked";
 
     private Stage currentStage = Stage.NOVICE;
-
-    private boolean setStage = false;
+    private boolean isLocked = false;
 
     public StageManager() {
         // Default constructor for new data
@@ -38,8 +38,16 @@ public class StageManager extends PersistentState {
     public void setStage(Stage stage) {
         this.currentStage = stage;
         System.out.println("[Renovatio] Stage set to " + currentStage.getDisplayName());
-        setStage = true;
         markDirty(); // Tell Minecraft to save this state
+    }
+
+    public boolean isLocked() {
+        return isLocked;
+    }
+
+    public void setLocked(boolean locked) {
+        this.isLocked = locked;
+        markDirty();
     }
 
     public void increaseStage() {
@@ -53,6 +61,7 @@ public class StageManager extends PersistentState {
     @Override
     public NbtCompound writeNbt(NbtCompound nbt) {
         nbt.putInt(NBT_STAGE, currentStage.getId());
+        nbt.putBoolean(NBT_LOCKED, isLocked);
         return nbt;
     }
 
@@ -60,6 +69,7 @@ public class StageManager extends PersistentState {
         StageManager data = new StageManager();
         int stageId = nbt.contains(NBT_STAGE) ? nbt.getInt(NBT_STAGE) : Stage.NOVICE.getId();
         data.currentStage = Stage.fromId(stageId);
+        data.isLocked = nbt.getBoolean(NBT_LOCKED);
         return data;
     }
 
@@ -70,6 +80,9 @@ public class StageManager extends PersistentState {
 
     public static void checkAndUpdate(ServerWorld world) {
         StageManager manager = get(world);
+        if (manager.isLocked()) {
+            return; // Do not update if the stage is locked
+        }
         Stage stage = manager.getStage();
 
         MinecraftServer server = world.getServer();
@@ -196,6 +209,4 @@ public class StageManager extends PersistentState {
 
         // TODO: Add other stages here!
     }
-
-
 }

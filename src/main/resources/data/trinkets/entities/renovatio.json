@@ -1,0 +1,11 @@
+{
+  "entities": [
+    "minecraft:player"
+  ],
+  "slots": [
+    "head/underarmor_h",
+    "chest/underarmor_c",
+    "legs/underarmor_l",
+    "feet/underarmor_f"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:leather_chestplate",
+    "minecraft:stick",
+    "renovatio:leather_under_chest"
+
+  ]
+}

@@ -1,6 +1,7 @@
 package RenovatioMod.renovatio.item.custom.equipment;
 
 import RenovatioMod.renovatio.item.ModToolMaterials;
+import RenovatioMod.renovatio.item.custom.equipment.tool.DrillPickaxeItem;
 import RenovatioMod.renovatio.item.custom.equipment.weapon.melee.axe.BattleAxeItem;
 import RenovatioMod.renovatio.item.custom.equipment.weapon.melee.axe.CustomAxeItem;
 import RenovatioMod.renovatio.item.custom.equipment.weapon.melee.sword.*;
@@ -13,10 +14,8 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
 public class ModMeleeWeapons {
-    public static final Item ROSE_GOLD_SWORD = new SwordItem(
+    public static final Item ROSE_GOLD_SWORD = new CustomSwordItem(
             ModToolMaterials.ROSE_GOLD,
-            3,  // 6 Total attack damage 3(Sword) + 2 (Material) + 1(Item)
-            -2.4f,  // attack speed 4-2.4 = 1.6
             new FabricItemSettings()
     );
     public static final Item ROSE_GOLD_PICKAXE = new PickaxeItem(
@@ -38,10 +37,8 @@ public class ModMeleeWeapons {
             new FabricItemSettings()
 
     );
-    public static final Item REFINED_IRON_SWORD = new SwordItem(
+    public static final Item REFINED_IRON_SWORD = new CustomSwordItem(
             ModToolMaterials.REFINED_IRON,
-            3,  // attack damage
-            -2.4f,  // attack speed
             new FabricItemSettings()
     );
 
@@ -70,10 +67,8 @@ public class ModMeleeWeapons {
             new FabricItemSettings()
     );
 
-    public static final Item REFINED_IRON_AXE = new AxeItem(
+    public static final Item REFINED_IRON_AXE = new CustomAxeItem(
             ModToolMaterials.REFINED_IRON,
-            4,  // attack damage
-            -2.8f,  // attack speed
             new FabricItemSettings()
     );
 
@@ -82,10 +77,8 @@ public class ModMeleeWeapons {
             new FabricItemSettings()
     );
 
-    public static final Item REFINED_IRON_HOE = new HoeItem(
+    public static final Item REFINED_IRON_HOE = new CustomHoeItem(
             ModToolMaterials.REFINED_IRON,
-            0,  // attack damage
-            -3.0f,  // attack speed
             new FabricItemSettings()
     );
 
@@ -94,10 +87,8 @@ public class ModMeleeWeapons {
             new FabricItemSettings()
     );
 
-    public static final Item COPPER_SWORD = new SwordItem(
+    public static final Item COPPER_SWORD = new CustomSwordItem(
             ModToolMaterials.COPPER,
-            3,  // attack damage
-            -2.4f,  // attack speed
             new FabricItemSettings()
     );
 
@@ -141,10 +132,8 @@ public class ModMeleeWeapons {
             new FabricItemSettings()
     );
 
-    public static final Item COPPER_PICKAXE = new PickaxeItem(
+    public static final Item COPPER_PICKAXE = new DrillPickaxeItem(
             ModToolMaterials.COPPER,
-            0,  // attack damage
-            -2.8f,  // attack speed
             new FabricItemSettings()
     );
 

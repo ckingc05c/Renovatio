@@ -6,24 +6,30 @@ import com.google.common.collect.Multimap;
 import com.jamieswhiteshirt.reachentityattributes.ReachEntityAttributes;
 import de.dafuqs.additionalentityattributes.AdditionalEntityAttributes;
 import net.minecraft.entity.EquipmentSlot;
+import net.puffish.attributesmod.AttributesMod;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.item.Item;
 import net.minecraft.item.PickaxeItem;
 import net.minecraft.item.ToolMaterial;
 
 import java.util.UUID;
 
-public class HammerPickaxeItem extends PickaxeItem {
+public class DrillPickaxeItem extends PickaxeItem {
     private final Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers;
 
 
-    private static final MeleeWeaponStats STATS = MiningToolStats.HAMMER;
+    private static final MeleeWeaponStats STATS = MiningToolStats.DRILL;
     // Static UUIDs per attribute type
     private static final UUID REACH_MODIFIER_ID = UUID.fromString("aaaa1111-2222-3333-4444-555566667777");
     private static final UUID CRIT_MODIFIER_ID = UUID.fromString("bbbb1111-2222-3333-4444-555566667777");
+    private static final UUID FORTUNE_MODIFIER_ID = UUID.fromString("cccc1111-2222-3333-4444-555566667777");
+    private static final float MINING_LEVEL_FORTUNE_MODIFIER = 0.325f;
 
-    public HammerPickaxeItem(ToolMaterial material, Settings settings) {
+
+
+    public DrillPickaxeItem(ToolMaterial material, Item.Settings settings) {
         super(material, (int) STATS.getAttackDamageBonus(), STATS.getTotalAttackSpeed(), settings);
 
         ImmutableMultimap.Builder<EntityAttribute, EntityAttributeModifier> builder = ImmutableMultimap.builder();
@@ -53,11 +59,16 @@ public class HammerPickaxeItem extends PickaxeItem {
                 new EntityAttributeModifier(CRIT_MODIFIER_ID, "Critical Bonus",
                         STATS.getCritDamage(), EntityAttributeModifier.Operation.ADDITION));
 
+        // Fortune Bonus
+        builder.put(AttributesMod.FORTUNE,
+                new EntityAttributeModifier(FORTUNE_MODIFIER_ID, "Fortune Bonus",
+                        (material.getMiningLevel()*MINING_LEVEL_FORTUNE_MODIFIER), EntityAttributeModifier.Operation.ADDITION));
+
         this.attributeModifiers = builder.build();
     }
 
-    @Override
-    public Multimap<EntityAttribute, EntityAttributeModifier> getAttributeModifiers(EquipmentSlot slot) {
+        @Override
+        public Multimap<EntityAttribute, EntityAttributeModifier> getAttributeModifiers(EquipmentSlot slot) {
         return slot == EquipmentSlot.MAINHAND ? this.attributeModifiers : super.getAttributeModifiers(slot);
     }
 }

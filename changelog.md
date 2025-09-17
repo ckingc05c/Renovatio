@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.5.45.6.12] - 2025-07-21
+### Changed
+- Updated the `/stage` command with more robust functionality:
+  - `/stage set <stage> [lock|unlock]` to set the stage and optionally lock or unlock progression.
+  - `/stage lock` and `/stage unlock` to control stage progression locking.
+  - `/stage get` to view the current stage and its lock status.
+
 ## [1.0.5.45.6.4] - 2025-07-17
 ### Changed
 - Changed formula for ranged weapon stats for all Bow and Crossbow types.

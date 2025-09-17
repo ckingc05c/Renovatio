@@ -24,5 +24,9 @@
   "item.renovatio.copper_scythe": "Copper Scythe",
   "item.renovatio.copper_pickaxe": "Copper Pickaxe",
   "item.renovatio.copper_shovel": "Copper Shovel",
-  "container.renovatio.extended_crafting": "Extending Crafting"
+  "container.renovatio.extended_crafting": "Extending Crafting",
+  "trinkets.slot.chest.underarmor_c": "Underarmor Chest",
+  "trinkets.slot.feet.underarmor_f": "Underarmor Feet",
+  "trinkets.slot.head.underarmor_h": "Underarmor Head",
+  "trinkets.slot.legs.underarmor_l": "Underarmor Legs"
 }
