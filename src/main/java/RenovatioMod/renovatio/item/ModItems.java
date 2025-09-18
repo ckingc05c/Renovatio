@@ -6,9 +6,15 @@ import RenovatioMod.renovatio.item.custom.equipment.ModRangedWeapons;
 import RenovatioMod.renovatio.item.custom.trinket.underarmor.ModUnderArmor;
 import RenovatioMod.renovatio.item.custom.trinket.underarmor.underarmor_c.UnderArmorChest;
 
+/**
+ * This class is responsible for registering all the items in the mod.
+ */
 public class ModItems {
 
 
+    /**
+     * Registers all the items in the mod.
+     */
     public static void registerItems() {
         ModMeleeWeapons.registerItems();
         ModRangedWeapons.registerItems();

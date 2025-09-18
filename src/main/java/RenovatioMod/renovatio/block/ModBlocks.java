@@ -14,10 +14,15 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
+/**
+ * This class is responsible for registering all the blocks in the mod.
+ */
 public class ModBlocks {
 
 
-    // This is the main registration method called from your Renovatio.java
+    /**
+     * This is the main registration method called from your Renovatio.java
+     */
     public static void registerModBlocks() {
         Renovatio.LOGGER.info("Registering ModBlocks for " + Renovatio.MOD_ID);
 

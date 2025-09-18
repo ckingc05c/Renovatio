@@ -6,11 +6,19 @@ import net.fabric_extras.ranged_weapon.api.RangedConfig;
 import net.minecraft.item.Item;
 import net.minecraft.item.ToolMaterial;
 
+/**
+ * This class represents a custom bow item.
+ * It is a base class for other bows.
+ */
 public class CustomBowItem extends CustomBow {
     private static final RangedWeaponStats STATS = RangedWeaponStats.BOW;
 
 
 
+    /**
+     * Constructs a new CustomBowItem.
+     * @param material The tool material.
+     */
     public CustomBowItem(ToolMaterial material)
     {
         super(new Item.Settings().maxDamage(STATS.getFinalDurability(material)), (material::getRepairIngredient));

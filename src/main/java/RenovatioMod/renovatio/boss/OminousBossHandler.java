@@ -13,9 +13,21 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 
+/**
+ * This class handles the logic for Ominous Bosses.
+ * Ominous Bosses are stronger versions of vanilla bosses that can be spawned under certain conditions.
+ */
 public class OminousBossHandler {
+    /**
+     * The NBT tag used to mark an entity as an Ominous Boss.
+     */
     public static final String TAG = "RenovatioOminous";
 
+    /**
+     * Checks if an entity should be an Ominous Boss.
+     * @param entity The entity to check.
+     * @return True if the entity should be an Ominous Boss, false otherwise.
+     */
     public static boolean shouldApplyOminous(LivingEntity entity) {
         if (!(entity.getWorld() instanceof ServerWorld world)) return false;
 
@@ -29,6 +41,10 @@ public class OminousBossHandler {
         return true;
     }
 
+    /**
+     * Applies the Ominous modifiers to an entity.
+     * @param entity The entity to apply the modifiers to.
+     */
     public static void applyOminousModifiers(LivingEntity entity) {
         if (entity.getWorld().isClient) return;
 
@@ -47,6 +63,11 @@ public class OminousBossHandler {
         }
     }
 
+    /**
+     * Checks if an entity is an Ominous Boss.
+     * @param entity The entity to check.
+     * @return True if the entity is an Ominous Boss, false otherwise.
+     */
     public static boolean isOminous(Entity entity) {
         if (!(entity instanceof LivingEntity living)) return false;
         NbtCompound nbt = new NbtCompound();
@@ -54,4 +75,3 @@ public class OminousBossHandler {
         return nbt.getBoolean(TAG);
     }
 }
-

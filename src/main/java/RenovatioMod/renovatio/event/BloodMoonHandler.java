@@ -5,6 +5,10 @@ import RenovatioMod.renovatio.stage.Stage;
 
 import java.util.Random;
 
+/**
+ * This class handles the logic for the Blood Moon and Crimson Moon events.
+ * These events are triggered randomly at night and increase the difficulty of the game.
+ */
 public class BloodMoonHandler {
 
     private static final Random RANDOM = new Random();
@@ -24,14 +28,31 @@ public class BloodMoonHandler {
             0.10, 0.125, 0.15, 0.20, 0.25
     };
 
+    /**
+     * Checks if a Blood Moon is currently active.
+     *
+     * @return true if a Blood Moon is active, false otherwise.
+     */
     public static boolean isBloodMoon() {
         return isBloodMoon;
     }
 
+    /**
+     * Checks if a Crimson Moon is currently active.
+     *
+     * @return true if a Crimson Moon is active, false otherwise.
+     */
     public static boolean isCrimsonMoon() {
         return isCrimson;
     }
 
+    /**
+     * Tries to trigger a Blood Moon or Crimson Moon event.
+     * The chance of an event triggering depends on the current stage.
+     *
+     * @param world The server world.
+     * @param stageId The current stage ID.
+     */
     public static void tryTrigger(ServerWorld world, int stageId) {
         // Clamp stageId to valid range
         int index = Math.max(0, Math.min(stageId - 1, BLOOD_MOON_CHANCES.length - 1));
@@ -53,6 +74,11 @@ public class BloodMoonHandler {
         }
     }
 
+    /**
+     * Ticks the day extension for Crimson Moons.
+     *
+     * @param world The server world.
+     */
     public static void tickDayExtension(ServerWorld world) {
         if (crimsonTicksLeft > 0) {
             crimsonTicksLeft--;

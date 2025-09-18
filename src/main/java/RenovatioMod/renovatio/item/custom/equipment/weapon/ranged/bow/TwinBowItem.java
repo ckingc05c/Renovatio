@@ -16,6 +16,10 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
 import net.minecraft.world.World;
 
+/**
+ * This class represents a twin bow item.
+ * It is a custom bow that fires two arrows at once.
+ */
 public class TwinBowItem extends CustomBow {
     private static final RangedWeaponStats STATS = RangedWeaponStats.TWINBOW;
 
@@ -23,6 +27,10 @@ public class TwinBowItem extends CustomBow {
 
 
 
+    /**
+     * Constructs a new TwinBowItem.
+     * @param material The tool material.
+     */
     public TwinBowItem(ToolMaterial material)
     {
         super(new Item.Settings().maxDamage(STATS.getFinalDurability(material)), (material::getRepairIngredient));
@@ -30,6 +38,13 @@ public class TwinBowItem extends CustomBow {
 
     }
 
+    /**
+     * Called when the player stops using the bow.
+     * @param stack The item stack.
+     * @param world The world.
+     * @param user The entity that used the bow.
+     * @param remainingUseTicks The number of ticks remaining in the use action.
+     */
     @Override
     public void onStoppedUsing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
         if (!(user instanceof final PlayerEntity player)) {

@@ -14,11 +14,17 @@ import net.minecraft.item.ToolItem;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 
+/**
+ * This class handles the tooltip for weapon attributes.
+ */
 public class WeaponAttributeTooltip {
 
     private static final double BASE_ATTACK_REACH = 3.0;
     private static final double BASE_CRIT_DAMAGE = 1.5;
 
+    /**
+     * Initializes the weapon attribute tooltip.
+     */
     public static void initialize() {
         ItemTooltipCallback.EVENT.register((itemStack, context, lines) -> {
 

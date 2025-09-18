@@ -10,9 +10,18 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
+/**
+ * This class represents the screen for the extended crafting table.
+ */
 public class ExtendedCraftingScreen extends HandledScreen<ExtendedCraftingScreenHandler> {
     private static final Identifier TEXTURE = new Identifier(Renovatio.MOD_ID, "textures/gui/container/extended_crafting_table.png");
 
+    /**
+     * Constructs a new ExtendedCraftingScreen.
+     * @param handler The screen handler.
+     * @param inventory The player inventory.
+     * @param title The title of the screen.
+     */
     public ExtendedCraftingScreen(ExtendedCraftingScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
         this.backgroundWidth = 256;

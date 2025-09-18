@@ -9,9 +9,17 @@ import net.minecraft.item.ToolMaterial;
 import net.minecraft.item.ToolMaterials;
 
 
+/**
+ * This class represents a longbow item.
+ * It is a custom bow with a longer draw time and higher damage.
+ */
 public class LongBowItem extends CustomBow {
     private static final RangedWeaponStats STATS = RangedWeaponStats.LONGBOW;
 
+    /**
+     * Constructs a new LongBowItem.
+     * @param material The tool material.
+     */
     public LongBowItem(ToolMaterial material) {
         super(createSettings(material), material::getRepairIngredient);
         this.configure(new RangedConfig(
@@ -21,6 +29,11 @@ public class LongBowItem extends CustomBow {
         ));
     }
 
+    /**
+     * Creates the item settings for the longbow.
+     * @param material The tool material.
+     * @return The item settings.
+     */
     private static Item.Settings createSettings(ToolMaterial material) {
         Item.Settings settings = new Item.Settings().maxDamage(STATS.getFinalDurability(material));
 
@@ -33,5 +46,3 @@ public class LongBowItem extends CustomBow {
         return settings;
     }
 }
-
-

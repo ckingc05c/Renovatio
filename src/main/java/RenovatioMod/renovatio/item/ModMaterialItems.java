@@ -6,26 +6,71 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
+/**
+ * This class is responsible for registering all the material items in the mod.
+ */
 public class ModMaterialItems {
     // Existing Items
+    /**
+     * The rose gold ingot item.
+     */
     public static final Item ROSE_GOLD_INGOT = new Item(new FabricItemSettings());
+    /**
+     * The refined iron ingot item.
+     */
     public static final Item REFINED_IRON_INGOT = new Item(new FabricItemSettings());
+    /**
+     * The nether rose ingot item.
+     */
     public static final Item NETHER_ROSE_INGOT = new Item(new FabricItemSettings());
+    /**
+     * The bronze ingot item.
+     */
     public static final Item BRONZE_INGOT = new Item(new FabricItemSettings());
+    /**
+     * The steel ingot item.
+     */
     public static final Item STEEL_INGOT = new Item(new FabricItemSettings());
+    /**
+     * The obsidian steel ingot item.
+     */
     public static final Item OBSIDIAN_STEEL_INGOT = new Item(new FabricItemSettings());
+    /**
+     * The ender steel ingot item.
+     */
     public static final Item ENDER_STEEL_INGOT = new Item(new FabricItemSettings());
+    /**
+     * The void crystal gem item.
+     */
     public static final Item VOID_CRYSTAL_GEM = new Item(new FabricItemSettings());
 
     // New Items from Table
+    /**
+     * The rose steel ingot item.
+     */
     public static final Item ROSE_STEEL_INGOT = new Item(new FabricItemSettings());
+    /**
+     * The elemental void crystal gem item.
+     */
     public static final Item ELEMENTAL_VOID_CRYSTAL_GEM = new Item(new FabricItemSettings());
+    /**
+     * The primordial void crystal gem item.
+     */
     public static final Item PRIMORDIAL_VOID_CRYSTAL_GEM = new Item(new FabricItemSettings());
 
+    /**
+     * The bronze nugget item.
+     */
     public static final Item BRONZE_NUGGET = new Item(new FabricItemSettings());
+    /**
+     * The steel nugget item.
+     */
     public static final Item STEEL_NUGGET = new Item(new FabricItemSettings());
 
 
+    /**
+     * Registers all the material items.
+     */
     public static void registerItems() {
         // Existing Registrations
         Registry.register(Registries.ITEM, new Identifier("renovatio", "rose_gold_ingot"), ROSE_GOLD_INGOT);

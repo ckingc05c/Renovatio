@@ -12,7 +12,9 @@ import static RenovatioMod.renovatio.item.ModMaterialItems.*;
 import java.util.function.Supplier;
 
 
-
+/**
+ * This enum contains the armor materials for the mod.
+ */
 public enum ModArmorMaterials implements ArmorMaterial {
     // Note: Protection values are rounded and ordered as {Boots, Leggings, Chestplate, Helmet}
     REINFORCED_LEATHER("reinforced_leather", 240, new int[]{1, 2, 3, 1}, 15,

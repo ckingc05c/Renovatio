@@ -18,6 +18,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Manages the global stage of the game.
+ * The stage determines the difficulty of the game and can be advanced by meeting certain criteria.
+ */
 public class StageManager extends PersistentState {
 
     private static final String KEY = "renovatio_stage";
@@ -27,29 +31,51 @@ public class StageManager extends PersistentState {
     private Stage currentStage = Stage.NOVICE;
     private boolean isLocked = false;
 
+    /**
+     * Default constructor for new data.
+     */
     public StageManager() {
         // Default constructor for new data
     }
 
+    /**
+     * Gets the current stage.
+     * @return The current stage.
+     */
     public Stage getStage() {
         return currentStage;
     }
 
+    /**
+     * Sets the current stage.
+     * @param stage The stage to set.
+     */
     public void setStage(Stage stage) {
         this.currentStage = stage;
         System.out.println("[Renovatio] Stage set to " + currentStage.getDisplayName());
         markDirty(); // Tell Minecraft to save this state
     }
 
+    /**
+     * Checks if the stage is locked.
+     * @return True if the stage is locked, false otherwise.
+     */
     public boolean isLocked() {
         return isLocked;
     }
 
+    /**
+     * Sets whether the stage is locked.
+     * @param locked True to lock the stage, false to unlock it.
+     */
     public void setLocked(boolean locked) {
         this.isLocked = locked;
         markDirty();
     }
 
+    /**
+     * Increases the stage to the next level.
+     */
     public void increaseStage() {
         if (currentStage != Stage.ASCENDANT) {
             currentStage = Stage.next(currentStage);
@@ -58,6 +84,11 @@ public class StageManager extends PersistentState {
         }
     }
 
+    /**
+     * Writes the stage data to an NBT compound.
+     * @param nbt The NBT compound to write to.
+     * @return The NBT compound with the stage data.
+     */
     @Override
     public NbtCompound writeNbt(NbtCompound nbt) {
         nbt.putInt(NBT_STAGE, currentStage.getId());
@@ -65,6 +96,11 @@ public class StageManager extends PersistentState {
         return nbt;
     }
 
+    /**
+     * Creates a StageManager from an NBT compound.
+     * @param nbt The NBT compound to read from.
+     * @return A new StageManager instance.
+     */
     public static StageManager fromNbt(NbtCompound nbt) {
         StageManager data = new StageManager();
         int stageId = nbt.contains(NBT_STAGE) ? nbt.getInt(NBT_STAGE) : Stage.NOVICE.getId();
@@ -73,11 +109,20 @@ public class StageManager extends PersistentState {
         return data;
     }
 
+    /**
+     * Gets the StageManager for the given world.
+     * @param world The world to get the StageManager for.
+     * @return The StageManager for the world.
+     */
     public static StageManager get(ServerWorld world) {
         ServerWorld overworld = world.getServer().getOverworld();
         return overworld.getPersistentStateManager().getOrCreate(StageManager::fromNbt, StageManager::new, KEY);
     }
 
+    /**
+     * Checks if the stage should be updated and updates it if necessary.
+     * @param world The world to check.
+     */
     public static void checkAndUpdate(ServerWorld world) {
         StageManager manager = get(world);
         if (manager.isLocked()) {

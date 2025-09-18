@@ -14,6 +14,10 @@ import net.minecraft.item.ToolMaterial;
 
 import java.util.UUID;
 
+/**
+ * This class represents a longsword item.
+ * It is a custom sword with high damage and slow attack speed.
+ */
 public class LongSwordItem extends SwordItem {
     private final Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers;
     private static final MeleeWeaponStats STATS = SwordWeaponStats.LONG_SWORD;
@@ -22,6 +26,11 @@ public class LongSwordItem extends SwordItem {
     private static final UUID REACH_MODIFIER_ID = UUID.fromString("aaaa1111-2222-3333-4444-555566667777");
     private static final UUID CRIT_MODIFIER_ID = UUID.fromString("bbbb1111-2222-3333-4444-555566667777");
 
+    /**
+     * Constructs a new LongSwordItem.
+     * @param material The tool material.
+     * @param settings The item settings.
+     */
     public LongSwordItem(ToolMaterial material, Settings settings) {
         super(material, (int) STATS.getAttackDamageBonus(), STATS.getTotalAttackSpeed(), settings);
 
@@ -55,6 +64,11 @@ public class LongSwordItem extends SwordItem {
         this.attributeModifiers = builder.build();
     }
 
+    /**
+     * Gets the attribute modifiers for this item.
+     * @param slot The equipment slot.
+     * @return The attribute modifiers.
+     */
     @Override
     public Multimap<EntityAttribute, EntityAttributeModifier> getAttributeModifiers(EquipmentSlot slot) {
         return slot == EquipmentSlot.MAINHAND ? this.attributeModifiers : super.getAttributeModifiers(slot);
