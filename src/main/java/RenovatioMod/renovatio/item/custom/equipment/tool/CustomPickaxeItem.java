@@ -28,7 +28,11 @@ public class CustomPickaxeItem extends PickaxeItem {
     private static final UUID REACH_MODIFIER_ID = UUID.fromString("aaaa1111-2222-3333-4444-555566667777");
     private static final UUID CRIT_MODIFIER_ID = UUID.fromString("bbbb1111-2222-3333-4444-555566667777");
 
-
+    /**
+     * Constructs a new CustomPickaxeItem.
+     * @param material The tool material.
+     * @param settings The item settings.
+     */
 
     public CustomPickaxeItem(ToolMaterial material, Item.Settings settings) {
         super(material, (int) STATS.getAttackDamageBonus(), STATS.getTotalAttackSpeed(), settings);
@@ -68,14 +72,6 @@ public class CustomPickaxeItem extends PickaxeItem {
     @Override
     public Multimap<EntityAttribute, EntityAttributeModifier> getAttributeModifiers(EquipmentSlot slot) {
         return slot == EquipmentSlot.MAINHAND ? this.attributeModifiers : super.getAttributeModifiers(slot);
-    /**
-     * Constructs a new CustomPickaxeItem.
-     * @param material The tool material.
-     * @param attackDamage The attack damage.
-     * @param attackSpeed The attack speed.
-     * @param settings The item settings.
-     */
-    public CustomPickaxeItem(ToolMaterial material, int attackDamage, float attackSpeed, Settings settings) {
-        super(material, attackDamage, attackSpeed, settings);
     }
+
 }

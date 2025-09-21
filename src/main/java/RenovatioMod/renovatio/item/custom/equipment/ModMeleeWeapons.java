@@ -1,6 +1,7 @@
 package RenovatioMod.renovatio.item.custom.equipment;
 
 import RenovatioMod.renovatio.item.ModToolMaterials;
+import RenovatioMod.renovatio.item.custom.equipment.tool.CustomPickaxeItem;
 import RenovatioMod.renovatio.item.custom.equipment.tool.DrillPickaxeItem;
 import RenovatioMod.renovatio.item.custom.equipment.weapon.melee.axe.BattleAxeItem;
 import RenovatioMod.renovatio.item.custom.equipment.weapon.melee.axe.CustomAxeItem;
@@ -207,7 +208,7 @@ public class ModMeleeWeapons {
     /**
      * The copper pickaxe item.
      */
-    public static final Item COPPER_PICKAXE = new DrillPickaxeItem(
+    public static final Item COPPER_PICKAXE = new CustomPickaxeItem(
             ModToolMaterials.COPPER,
             new FabricItemSettings()
     );
