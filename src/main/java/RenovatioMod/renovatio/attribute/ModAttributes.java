@@ -19,7 +19,16 @@ public class ModAttributes {
 
     public static void registerAttributes() {
         Registry.register(Registries.ATTRIBUTE, new Identifier(Renovatio.MOD_ID, "generic.max_toughness"), GENERIC_MAX_TOUGHNESS);
-        // Add the attribute to players by default
-        FabricDefaultAttributeRegistry.register(EntityType.PLAYER, LivingEntity.createLivingAttributes().add(GENERIC_MAX_TOUGHNESS));
+
+        // --- CHANGE IS HERE ---
+        // Loop through all entity types and add the attribute to any that are LivingEntities
+        for (EntityType<?> type : Registries.ENTITY_TYPE) {
+            if (type.getBaseClass().isAssignableFrom(LivingEntity.class)) {
+                // This cast is safe because we checked it in the if statement
+                @SuppressWarnings("unchecked")
+                EntityType<LivingEntity> livingEntityType = (EntityType<LivingEntity>) type;
+                FabricDefaultAttributeRegistry.register(livingEntityType, LivingEntity.createLivingAttributes().add(GENERIC_MAX_TOUGHNESS));
+            }
+        }
     }
 }

@@ -1,5 +1,7 @@
 package RenovatioMod.renovatio.mixin.entity.player;
 
+import RenovatioMod.renovatio.attribute.ModAttributes;
+import RenovatioMod.renovatio.combat.toughness.ToughnessManager;
 import RenovatioMod.renovatio.stage.effects.StageEffects;
 import RenovatioMod.renovatio.stage.Stage;
 import RenovatioMod.renovatio.stage.StageManager;
@@ -91,25 +93,20 @@ public abstract class LivingEntityDamageMixin {
                 multiplier = StageEffects.getExplosionDamageModifier(stage);
             }
         }
-
-        // We don't scale melee damage here, as it's handled by attributes.
-        // The check for `attacker instanceof LivingEntity` is no longer needed here
-        // as the damage types cover those cases.
-
         float stageModifiedAmount = amount * (float) multiplier;
 
-        // --- RESISTANCE CALCULATION ---
-        // This is applied *after* the stage-based scaling.
+        // --- TOUGHNESS AND DAMAGE LAYERS ---
+        float currentToughness = ToughnessManager.getToughness(target);
+        if (currentToughness > 0) {
+            float damageToToughness = stageModifiedAmount;
+            float absorbed = Math.min(currentToughness, damageToToughness);
+            ToughnessManager.setToughness(target, currentToughness - absorbed);
 
-        /*
-
-        if (this.hasStatusEffect(StatusEffects.RESISTANCE)) {
-            int amplifier = this.getStatusEffect(StatusEffects.RESISTANCE).getAmplifier();
-            float reduction = (amplifier + 1) * 0.15f; // Your new 15% formula
-            reduction = Math.min(reduction, 1.0f); // Cap at 100%
-            return stageModifiedAmount * (1.0f - reduction);
+            // A portion of damage still applied to HP
+            float passthroughDamage = stageModifiedAmount * (1 - (currentToughness / (float)target.getAttributeValue(ModAttributes.GENERIC_MAX_TOUGHNESS)));
+            stageModifiedAmount = passthroughDamage;
         }
-        */
+
         return stageModifiedAmount;
     }
     @Inject(method = "modifyAppliedDamage", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/effect/StatusEffectInstance;getAmplifier()I", ordinal = 0), cancellable = true)

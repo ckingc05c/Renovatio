@@ -1,5 +1,6 @@
 package RenovatioMod.renovatio;
 
+import RenovatioMod.renovatio.attribute.ModAttributes;
 import RenovatioMod.renovatio.block.ModBlocks;
 import RenovatioMod.renovatio.effect.status.ModStatusEffect;
 import RenovatioMod.renovatio.entity.mob.hostile.boss.OminousBossHandler;
@@ -37,6 +38,7 @@ public class Renovatio implements ModInitializer {
         ItemAttributeHandler.register(); // Add this line
         AttributeEffectHandler.initialize(); // Add this line
         ModStatusEffect.registerStatusEffects();
+        ModAttributes.registerAttributes();
 
         ModBlockEntities.register();
         ModRecipeTypes.register(); // Register your custom recipe type

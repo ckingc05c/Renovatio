@@ -1,4 +1,10 @@
 # Changelog
+## [1.0.5.45.6.22] - 2025-09-21
+### Added
+- Started Work on **Toughness**, a new layered damage system inspired by Honkai: Star Rail, for all entities:
+    - Added a `Max Toughness` attribute to all mobs, acting as a buffer before health is depleted.
+    - Implemented a new damage calculation where Toughness absorbs the majority of incoming damage first.
+    - A small portion of damage now bypasses Toughness, ensuring that health is still affected even when the buffer is active.
 ## [1.0.5.45.6.21] - 2025-09-21
 ### Changed
 - Updated **Resistance** damage reduction formula:
