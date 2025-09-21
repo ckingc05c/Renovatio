@@ -30,6 +30,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Set;
 
+/**
+ * This mixin modifies the damage taken by living entities.
+ */
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityDamageMixin {
 
@@ -66,6 +69,12 @@ public abstract class LivingEntityDamageMixin {
             DamageTypes.THORNS
     );
 
+    /**
+     * Modifies the damage taken by a living entity based on the current stage and other factors.
+     * @param amount The original damage amount.
+     * @param source The damage source.
+     * @return The modified damage amount.
+     */
     @ModifyVariable(method = "damage", at = @At("HEAD"), argsOnly = true)
     private float modifyDamage(float amount, DamageSource source) {
         LivingEntity target = (LivingEntity) (Object) this;

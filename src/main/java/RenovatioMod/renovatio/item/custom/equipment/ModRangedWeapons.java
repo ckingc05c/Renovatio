@@ -9,15 +9,42 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
+/**
+ * This class is responsible for registering all the ranged weapons in the mod.
+ */
 public class ModRangedWeapons {
+    /**
+     * The wooden longbow item.
+     */
     public static final Item WOODEN_LONGBOW = new LongBowItem(ToolMaterials.WOOD);
+    /**
+     * The golden longbow item.
+     */
     public static final Item GOLDEN_LONGBOW = new LongBowItem(ToolMaterials.GOLD);
+    /**
+     * The iron longbow item.
+     */
     public static final Item IRON_LONGBOW = new LongBowItem(ToolMaterials.IRON);
+    /**
+     * The refined iron longbow item.
+     */
     public static final Item REFINED_IRON_LONGBOW = new LongBowItem(ModToolMaterials.REFINED_IRON);
 
+    /**
+     * The void crystal longbow item.
+     */
     public static final Item VOID_CRYSTAL_LONGBOW = new LongBowItem(ModToolMaterials.VOID_CRYSTAL);
+    /**
+     * The diamond longbow item.
+     */
     public static final Item DIAMOND_LONGBOW = new LongBowItem(ToolMaterials.DIAMOND);
+    /**
+     * The netherite longbow item.
+     */
     public static final Item NETHERITE_LONGBOW = new LongBowItem(ToolMaterials.NETHERITE);
+    /**
+     * The iron twinbow item.
+     */
     public static final Item IRON_TWINBOW = new TwinBowItem(ToolMaterials.IRON);
 
 

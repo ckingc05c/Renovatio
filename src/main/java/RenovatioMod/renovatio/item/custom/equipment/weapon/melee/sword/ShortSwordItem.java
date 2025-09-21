@@ -14,6 +14,10 @@ import net.minecraft.item.ToolMaterial;
 
 import java.util.UUID;
 
+/**
+ * This class represents a shortsword item.
+ * It is a custom sword with low damage and high attack speed.
+ */
 public class ShortSwordItem extends SwordItem {
 
 
@@ -24,6 +28,11 @@ public class ShortSwordItem extends SwordItem {
     private static final UUID REACH_MODIFIER_ID = UUID.fromString("aaaa1111-2222-3333-4444-555566667777");
     private static final UUID CRIT_MODIFIER_ID = UUID.fromString("bbbb1111-2222-3333-4444-555566667777");
 
+    /**
+     * Constructs a new ShortSwordItem.
+     * @param material The tool material.
+     * @param settings The item settings.
+     */
     public ShortSwordItem(ToolMaterial material, Settings settings) {
         super(material, (int) STATS.getAttackDamageBonus(), STATS.getTotalAttackSpeed(), settings);
 
@@ -57,6 +66,11 @@ public class ShortSwordItem extends SwordItem {
         this.attributeModifiers = builder.build();
     }
 
+    /**
+     * Gets the attribute modifiers for this item.
+     * @param slot The equipment slot.
+     * @return The attribute modifiers.
+     */
     @Override
     public Multimap<EntityAttribute, EntityAttributeModifier> getAttributeModifiers(EquipmentSlot slot) {
         return slot == EquipmentSlot.MAINHAND ? this.attributeModifiers : super.getAttributeModifiers(slot);

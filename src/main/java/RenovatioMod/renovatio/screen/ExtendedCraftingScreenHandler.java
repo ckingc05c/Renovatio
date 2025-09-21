@@ -9,15 +9,29 @@ import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.screen.slot.Slot;
 
+/**
+ * This class represents the screen handler for the extended crafting table.
+ */
 public class ExtendedCraftingScreenHandler extends ScreenHandler {
     private final Inventory inventory;
 
-    // This is the client-side constructor. It calls the main constructor below.
+    /**
+     * This is the client-side constructor. It calls the main constructor below.
+     * @param syncId The sync ID.
+     * @param playerInventory The player's inventory.
+     */
     public ExtendedCraftingScreenHandler(int syncId, PlayerInventory playerInventory) {
         // We pass our registered ScreenHandlerType here instead of 'this'.
         this(ModScreenHandlers.EXTENDED_CRAFTING_TABLE_SCREEN_HANDLER, syncId, playerInventory, new SimpleInventory(26));
     }
 
+    /**
+     * This is the main constructor.
+     * @param type The screen handler type.
+     * @param syncId The sync ID.
+     * @param playerInventory The player's inventory.
+     * @param inventory The inventory.
+     */
     public ExtendedCraftingScreenHandler(ScreenHandlerType<?> type, int syncId, PlayerInventory playerInventory, Inventory inventory) {
         super(type, syncId);
         checkSize(inventory, 26);

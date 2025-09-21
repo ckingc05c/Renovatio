@@ -25,10 +25,25 @@ import net.minecraft.util.ActionResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * The main initializer class for the Renovatio mod.
+ * This class is responsible for registering all the mod's features,
+ * such as blocks, items, screen handlers, events, and commands.
+ */
 public class Renovatio implements ModInitializer {
+    /**
+     * The unique identifier for the Renovatio mod.
+     */
     public static final String MOD_ID = "renovatio";
+    /**
+     * The logger instance for the Renovatio mod, used for logging messages.
+     */
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
+    /**
+     * This method is called by Fabric when the mod is initialized.
+     * It registers all the mod's content and sets up event listeners.
+     */
     @Override
     public void onInitialize() {
         // Corrected Order: Blocks first, then Items

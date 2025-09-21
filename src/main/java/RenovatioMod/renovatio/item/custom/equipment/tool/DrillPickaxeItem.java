@@ -16,6 +16,10 @@ import net.minecraft.item.ToolMaterial;
 
 import java.util.UUID;
 
+/**
+ * This class represents a drill pickaxe item.
+ * It is a custom pickaxe with special attributes.
+ */
 public class DrillPickaxeItem extends PickaxeItem {
     private final Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers;
 
@@ -29,6 +33,11 @@ public class DrillPickaxeItem extends PickaxeItem {
 
 
 
+    /**
+     * Constructs a new DrillPickaxeItem.
+     * @param material The tool material.
+     * @param settings The item settings.
+     */
     public DrillPickaxeItem(ToolMaterial material, Item.Settings settings) {
         super(material, (int) STATS.getAttackDamageBonus(), STATS.getTotalAttackSpeed(), settings);
 
@@ -67,6 +76,11 @@ public class DrillPickaxeItem extends PickaxeItem {
         this.attributeModifiers = builder.build();
     }
 
+    /**
+     * Gets the attribute modifiers for this item.
+     * @param slot The equipment slot.
+     * @return The attribute modifiers.
+     */
         @Override
         public Multimap<EntityAttribute, EntityAttributeModifier> getAttributeModifiers(EquipmentSlot slot) {
         return slot == EquipmentSlot.MAINHAND ? this.attributeModifiers : super.getAttributeModifiers(slot);

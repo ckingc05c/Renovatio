@@ -16,6 +16,9 @@ import net.puffish.attributesmod.AttributesMod;
 
 import java.util.UUID;
 
+/**
+ * This class represents a custom pickaxe item.
+ */
 public class CustomPickaxeItem extends PickaxeItem {
     private final Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers;
 
@@ -65,5 +68,14 @@ public class CustomPickaxeItem extends PickaxeItem {
     @Override
     public Multimap<EntityAttribute, EntityAttributeModifier> getAttributeModifiers(EquipmentSlot slot) {
         return slot == EquipmentSlot.MAINHAND ? this.attributeModifiers : super.getAttributeModifiers(slot);
+    /**
+     * Constructs a new CustomPickaxeItem.
+     * @param material The tool material.
+     * @param attackDamage The attack damage.
+     * @param attackSpeed The attack speed.
+     * @param settings The item settings.
+     */
+    public CustomPickaxeItem(ToolMaterial material, int attackDamage, float attackSpeed, Settings settings) {
+        super(material, attackDamage, attackSpeed, settings);
     }
 }

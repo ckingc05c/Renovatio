@@ -15,6 +15,10 @@ import net.minecraft.item.ToolMaterial;
 
 import java.util.UUID;
 
+/**
+ * This class represents a great axe item.
+ * It is a custom axe with high damage and slow attack speed.
+ */
 public class GreatAxeItem extends AxeItem {
     private final Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers;
     private static final MeleeWeaponStats STATS = AxeWeaponStats.GREAT_AXE;
@@ -23,6 +27,11 @@ public class GreatAxeItem extends AxeItem {
     private static final UUID REACH_MODIFIER_ID = UUID.fromString("aaaa1111-2222-3333-4444-555566667777");
     private static final UUID CRIT_MODIFIER_ID = UUID.fromString("bbbb1111-2222-3333-4444-555566667777");
 
+    /**
+     * Constructs a new GreatAxeItem.
+     * @param material The tool material.
+     * @param settings The item settings.
+     */
     public GreatAxeItem(ToolMaterial material, Item.Settings settings) {
         super(material, (int) STATS.getAttackDamageBonus(), STATS.getTotalAttackSpeed(), settings);
 
@@ -56,6 +65,11 @@ public class GreatAxeItem extends AxeItem {
         this.attributeModifiers = builder.build();
     }
 
+    /**
+     * Gets the attribute modifiers for this item.
+     * @param slot The equipment slot.
+     * @return The attribute modifiers.
+     */
     @Override
     public Multimap<EntityAttribute, EntityAttributeModifier> getAttributeModifiers(EquipmentSlot slot) {
         return slot == EquipmentSlot.MAINHAND ? this.attributeModifiers : super.getAttributeModifiers(slot);

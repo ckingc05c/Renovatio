@@ -23,16 +23,38 @@ import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * Represents an iron blast furnace block in the game.
+ * This block is an upgraded version of the vanilla blast furnace.
+ */
 public class IronBlastFurnaceBlock extends AbstractFurnaceBlock {
+    /**
+     * The direction the furnace is facing.
+     */
     public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
+    /**
+     * Whether the furnace is currently lit.
+     */
     public static final BooleanProperty LIT = Properties.LIT;
 
+    /**
+     * Constructs a new IronBlastFurnaceBlock with the given settings.
+     *
+     * @param settings The settings for the block.
+     */
     public IronBlastFurnaceBlock(Settings settings) {
         super(settings);
         this.setDefaultState(this.stateManager.getDefaultState().with(FACING, Direction.NORTH).with(LIT, false));
     }
 
-    // This new method adds the particle effects
+    /**
+     * This new method adds the particle effects when the furnace is lit.
+     *
+     * @param state The current block state.
+     * @param world The world in which the block is located.
+     * @param pos The position of the block.
+     * @param random A random number generator.
+     */
     @Override
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
         if (state.get(LIT)) {
@@ -54,27 +76,59 @@ public class IronBlastFurnaceBlock extends AbstractFurnaceBlock {
         }
     }
 
+    /**
+     * Gets the block state to be placed in the world.
+     *
+     * @param ctx The item placement context.
+     * @return The block state to be placed.
+     */
     @Nullable
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
         return this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing().getOpposite());
     }
 
+    /**
+     * Rotates the block state.
+     *
+     * @param state The current block state.
+     * @param rotation The rotation to apply.
+     * @return The rotated block state.
+     */
     @Override
     public BlockState rotate(BlockState state, BlockRotation rotation) {
         return state.with(FACING, rotation.rotate(state.get(FACING)));
     }
 
+    /**
+     * Mirrors the block state.
+     *
+     * @param state The current block state.
+     * @param mirror The mirror to apply.
+     * @return The mirrored block state.
+     */
     @Override
     public BlockState mirror(BlockState state, BlockMirror mirror) {
         return state.rotate(mirror.getRotation(state.get(FACING)));
     }
 
+    /**
+     * Appends properties to the block state.
+     *
+     * @param builder The state manager builder.
+     */
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(FACING, LIT);
     }
 
+    /**
+     * Opens the screen for the furnace.
+     *
+     * @param world The world in which the block is located.
+     * @param pos The position of the block.
+     * @param player The player who is opening the screen.
+     */
     @Override
     protected void openScreen(World world, BlockPos pos, PlayerEntity player) {
         BlockEntity blockEntity = world.getBlockEntity(pos);
@@ -83,11 +137,26 @@ public class IronBlastFurnaceBlock extends AbstractFurnaceBlock {
         }
     }
 
+    /**
+     * Creates a new block entity for the iron blast furnace.
+     *
+     * @param pos The position of the block.
+     * @param state The current block state.
+     * @return A new {@link IronBlastFurnaceBlockEntity} instance.
+     */
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
         return new IronBlastFurnaceBlockEntity(pos, state);
     }
 
+    /**
+     * Gets the ticker for the block entity.
+     *
+     * @param world The world in which the block is located.
+     * @param state The current block state.
+     * @param type The block entity type.
+     * @return The block entity ticker.
+     */
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
