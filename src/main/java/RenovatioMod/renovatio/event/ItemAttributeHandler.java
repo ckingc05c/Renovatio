@@ -12,12 +12,26 @@ import net.minecraft.item.HoeItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolItem;
 
+/**
+ * This class handles the modification of item attributes.
+ * It is responsible for changing the attributes of vanilla tools like axes and hoes.
+ */
 public class ItemAttributeHandler {
 
+    /**
+     * Registers the item attribute modifier callback.
+     */
     public static void register() {
         ModifyItemAttributeModifiersCallback.EVENT.register(ItemAttributeHandler::modifyAttributes);
     }
 
+    /**
+     * Modifies the attributes of an item stack.
+     *
+     * @param stack The item stack to modify.
+     * @param slot The equipment slot the item is in.
+     * @param attributeModifiers The map of attribute modifiers to modify.
+     */
     private static void modifyAttributes(ItemStack stack, EquipmentSlot slot, Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers) {
         // We only care about the main hand
         if (slot != EquipmentSlot.MAINHAND) {

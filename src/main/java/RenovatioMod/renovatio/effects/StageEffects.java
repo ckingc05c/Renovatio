@@ -5,11 +5,18 @@ import com.ibm.icu.impl.CacheValue;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributes;
 
+/**
+ * This class contains the effects for the different stages.
+ */
 public class StageEffects {
 
 
 
-    // Example modifier functions
+    /**
+     * Gets the health modifier for a given stage.
+     * @param stage The stage.
+     * @return The health modifier.
+     */
     public static double getHealthModifier(Stage stage) {
         return switch (stage) {
             case NOVICE -> 0.8;
@@ -25,6 +32,11 @@ public class StageEffects {
         };
     }
 
+    /**
+     * Gets the melee damage modifier for a given stage.
+     * @param stage The stage.
+     * @return The melee damage modifier.
+     */
     public static double getMeleeDamageModifier(Stage stage) {
         return switch (stage) {
             case NOVICE -> 0.9;
@@ -39,6 +51,12 @@ public class StageEffects {
             case ASCENDANT -> 2.5;
         };
     }
+
+    /**
+     * Gets the projectile damage modifier for a given stage.
+     * @param stage The stage.
+     * @return The projectile damage modifier.
+     */
     public static double getProjectileDamageModifier(Stage stage) {
         return switch (stage) {
             case NOVICE -> 0.85;
@@ -54,6 +72,11 @@ public class StageEffects {
         };
     }
 
+    /**
+     * Gets the explosion damage modifier for a given stage.
+     * @param stage The stage.
+     * @return The explosion damage modifier.
+     */
     public static double getExplosionDamageModifier(Stage stage) {
         return switch (stage) {
             case NOVICE -> 0.85;
@@ -68,6 +91,12 @@ public class StageEffects {
             case ASCENDANT -> 2.0;
         };
     }
+
+    /**
+     * Gets the creeper explosion strength for a given stage.
+     * @param stage The stage.
+     * @return The creeper explosion strength.
+     */
     public static int getCreeperExplosionStrength(Stage stage) {
         return switch (stage) {
             case NOVICE -> 2;
@@ -79,6 +108,11 @@ public class StageEffects {
     }
 
 
+    /**
+     * Gets the ghast fireball strength for a given stage.
+     * @param stage The stage.
+     * @return The ghast fireball strength.
+     */
     public static int getGhastFireballStrength(Stage stage) {
         return switch (stage) {
             case NOVICE, NORMAL, ADEPT -> 1;
@@ -89,6 +123,11 @@ public class StageEffects {
         };
     }
 
+    /**
+     * Gets the ghast fireball speed for a given stage.
+     * @param stage The stage.
+     * @return The ghast fireball speed.
+     */
     public static double getGhastFireballSpeed(Stage stage) {
         return switch (stage) {
             case NOVICE -> 0.95;
@@ -104,6 +143,11 @@ public class StageEffects {
         };
     }
 
+    /**
+     * Gets the negative potion duration modifier for a given stage.
+     * @param stage The stage.
+     * @return The negative potion duration modifier.
+     */
     public static double getNegativePotionDurationModifier(Stage stage) {
         return switch (stage) {
             case NOVICE -> 0.80;
@@ -123,6 +167,11 @@ public class StageEffects {
 
 
 
+    /**
+     * Gets the environmental damage modifier for a given stage.
+     * @param stage The stage.
+     * @return The environmental damage modifier.
+     */
     public static double getEnvironmentalDamageModifier(Stage stage) {
         return switch (stage) {
             case NOVICE -> 0.85;
@@ -137,6 +186,12 @@ public class StageEffects {
             case ASCENDANT -> 2.0;
         };
     }
+
+    /**
+     * Gets the magic damage modifier for a given stage.
+     * @param stage The stage.
+     * @return The magic damage modifier.
+     */
     public static double getMagicDamageModifier(Stage stage) {
         return switch (stage) {
             case NOVICE -> 0.85;
@@ -151,6 +206,12 @@ public class StageEffects {
             case ASCENDANT -> 2.0;
         };
     }
+
+    /**
+     * Gets the speed modifier for a given stage.
+     * @param stage The stage.
+     * @return The speed modifier.
+     */
     public static double getSpeedModifier(Stage stage) {
         return switch (stage) {
             case NOVICE -> 0.95;
@@ -166,6 +227,11 @@ public class StageEffects {
         };
     }
 
+    /**
+     * Gets the aggro modifier for a given stage.
+     * @param stage The stage.
+     * @return The aggro modifier.
+     */
     public static double getAggroModifier(Stage stage) {
         return switch (stage) {
             case NOVICE -> 0.88;
@@ -181,7 +247,11 @@ public class StageEffects {
         };
     }
 
-    // Custom method to get base damage (or store a base value elsewhere)
+    /**
+     * Gets the base damage of a living entity.
+     * @param entity The entity.
+     * @return The base damage of the entity.
+     */
     private static double getBaseDamage(LivingEntity entity) {
         return entity.getAttributeBaseValue(EntityAttributes.GENERIC_ATTACK_DAMAGE);
     }

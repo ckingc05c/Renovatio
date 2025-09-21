@@ -10,23 +10,34 @@ import RenovatioMod.renovatio.stage.Stage;
 
 import java.util.UUID;
 
+/**
+ * This class handles the application of stage-based buffs to mobs.
+ */
 public class MobStageBuffHandler {
 
     // UUIDs to prevent stacking modifiers
     private static final UUID HEALTH_MODIFIER_UUID = UUID.fromString("aaaa1111-2222-3333-4444-555566667777");
     private static final UUID DAMAGE_MODIFIER_UUID = UUID.fromString("bbbb1111-2222-3333-4444-555566667777");
-    private static final UUID SPEED_MODIFIER_UUID = UUID.fromString("bbbb1111-2222-3333-4444-555566667777");
-    private static final UUID FOLLOW_RANGE_MODIFIER_UUID = UUID.fromString("bbbb1111-2222-3333-4444-555566667777");
+    private static final UUID SPEED_MODIFIER_UUID = UUID.fromString("cccc1111-2222-3333-4444-555566667777");
+    private static final UUID FOLLOW_RANGE_MODIFIER_UUID = UUID.fromString("dddd1111-2222-3333-4444-555566667777");
 
 
 
+    /**
+     * Registers the entity load event listener.
+     */
     public static void register() {
         ServerEntityEvents.ENTITY_LOAD.register((entity, world) -> {
             if (!(entity instanceof LivingEntity living)) return;
-            applyStageBuffs(living, world);
+            applyStageBuffs(living, (ServerWorld) world);
         });
     }
 
+    /**
+     * Applies stage-based buffs to a living entity.
+     * @param entity The entity to apply the buffs to.
+     * @param world The world the entity is in.
+     */
     public static void applyStageBuffs(LivingEntity entity, ServerWorld world) {
         if (!entity.isPlayer()){
             Stage stage = StageManager.get(world).getStage();

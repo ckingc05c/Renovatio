@@ -6,9 +6,16 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+/**
+ * This mixin modifies the ToolMaterials enum to change the properties of vanilla tool materials.
+ */
 @Mixin(ToolMaterials.class)
 public class ToolMaterialsMixin {
 
+    /**
+     * Injects into the getDurability method to change the durability of vanilla tool materials.
+     * @param cir The callback info.
+     */
     @Inject(method = "getDurability", at = @At("HEAD"), cancellable = true)
     private void getDurability(CallbackInfoReturnable<Integer> cir) {
         // Get the specific material instance (e.g., IRON, DIAMOND)
@@ -33,6 +40,11 @@ public class ToolMaterialsMixin {
             cir.setReturnValue(2560);
         }
     }
+
+    /**
+     * Injects into the getAttackDamage method to change the attack damage of vanilla tool materials.
+     * @param cir The callback info.
+     */
     @Inject(method = "getAttackDamage", at = @At("HEAD"), cancellable = true)
     private void getAttackDamage(CallbackInfoReturnable<Float> cir) {
         // Get the specific material instance (e.g., IRON, DIAMOND)
@@ -52,6 +64,11 @@ public class ToolMaterialsMixin {
 
 
     }
+
+    /**
+     * Injects into the getMiningLevel method to change the mining level of vanilla tool materials.
+     * @param cir The callback info.
+     */
     @Inject(method = "getMiningLevel", at = @At("HEAD"), cancellable = true)
     private void getMiningLevel(CallbackInfoReturnable<Integer> cir) {
         // Get the specific material instance (e.g., IRON, DIAMOND)

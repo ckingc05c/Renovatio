@@ -11,11 +11,19 @@ import net.fabric_extras.ranged_weapon.api.EntityAttributes_RangedWeapon;
 import java.util.Map;
 import java.util.UUID;
 
+/**
+ * This class handles the modification of status effect attributes.
+ * It is responsible for changing the attributes of vanilla status effects like Strength and Weakness.
+ */
 public class AttributeEffectHandler {
 
     private static final UUID STRENGTH_UUID = UUID.fromString("648D7064-6A60-4F59-8ABE-C2C23A6DD7A9");
     private static final UUID WEAKNESS_UUID = UUID.fromString("22653B89-116E-49DC-9B6B-9971489B5BE5");
 
+    /**
+     * Initializes the attribute effect handler.
+     * This method modifies the Strength and Weakness status effects to also affect ranged weapon damage.
+     */
     public static void initialize() {
         // --- Modify Strength ---
         StatusEffect strength = StatusEffects.STRENGTH;

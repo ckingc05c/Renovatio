@@ -14,11 +14,27 @@ import net.puffish.attributesmod.AttributesMod;
 
 import java.util.UUID;
 
+/**
+ * This class represents the under-armor chest item.
+ * It is a trinket that provides a bonus to melee resistance and an extra ring slot.
+ */
 public class UnderArmorChest extends TrinketItem {
+    /**
+     * Constructs a new UnderArmorChest item.
+     * @param settings The item settings.
+     */
     public UnderArmorChest(Settings settings) {
         super(settings);
     }
 
+    /**
+     * Gets the modifiers for this trinket.
+     * @param stack The item stack.
+     * @param slot The slot the item is in.
+     * @param entity The entity wearing the item.
+     * @param uuid The UUID of the modifier.
+     * @return A map of attribute modifiers.
+     */
     public Multimap<EntityAttribute, EntityAttributeModifier> getModifiers(ItemStack stack, SlotReference slot, LivingEntity entity, UUID uuid) {
         var modifiers = super.getModifiers(stack, slot, entity, uuid);
         // +10% movement speed

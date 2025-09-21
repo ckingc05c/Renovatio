@@ -15,8 +15,15 @@ import java.util.Arrays;
 import static net.minecraft.server.command.CommandManager.argument;
 import static net.minecraft.server.command.CommandManager.literal;
 
+/**
+ * This class implements the /stage command, which allows players to view and modify the current stage.
+ */
 public class StageCommand {
 
+    /**
+     * Registers the /stage command.
+     * @param dispatcher The command dispatcher.
+     */
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
         dispatcher.register(literal("stage")
                 .requires(source -> source.hasPermissionLevel(2))
@@ -51,6 +58,14 @@ public class StageCommand {
         );
     }
 
+    /**
+     * Executes the /stage set command.
+     * @param ctx The command context.
+     * @param stageName The name of the stage to set.
+     * @param lockStatus The lock status to set.
+     * @return 1 if the command was successful, 0 otherwise.
+     * @throws CommandSyntaxException
+     */
     private static int executeSet(CommandContext<ServerCommandSource> ctx, String stageName, String lockStatus) throws CommandSyntaxException {
         ServerWorld world = ctx.getSource().getWorld();
         StageManager manager = StageManager.get(world);
@@ -81,6 +96,12 @@ public class StageCommand {
         return 1;
     }
 
+    /**
+     * Executes the /stage lock command.
+     * @param ctx The command context.
+     * @return 1 if the command was successful, 0 otherwise.
+     * @throws CommandSyntaxException
+     */
     private static int executeLock(CommandContext<ServerCommandSource> ctx) throws CommandSyntaxException {
         ServerWorld world = ctx.getSource().getWorld();
         StageManager manager = StageManager.get(world);
@@ -89,6 +110,12 @@ public class StageCommand {
         return 1;
     }
 
+    /**
+     * Executes the /stage unlock command.
+     * @param ctx The command context.
+     * @return 1 if the command was successful, 0 otherwise.
+     * @throws CommandSyntaxException
+     */
     private static int executeUnlock(CommandContext<ServerCommandSource> ctx) throws CommandSyntaxException {
         ServerWorld world = ctx.getSource().getWorld();
         StageManager manager = StageManager.get(world);
@@ -97,6 +124,12 @@ public class StageCommand {
         return 1;
     }
 
+    /**
+     * Executes the /stage get command.
+     * @param ctx The command context.
+     * @return 1 if the command was successful, 0 otherwise.
+     * @throws CommandSyntaxException
+     */
     private static int executeGet(CommandContext<ServerCommandSource> ctx) throws CommandSyntaxException {
         ServerWorld world = ctx.getSource().getWorld();
         StageManager manager = StageManager.get(world);

@@ -14,6 +14,10 @@ import net.minecraft.item.ToolMaterial;
 
 import java.util.UUID;
 
+/**
+ * This class represents a hammer pickaxe item.
+ * It is a custom pickaxe with special attributes.
+ */
 public class HammerPickaxeItem extends PickaxeItem {
     private final Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers;
 
@@ -23,6 +27,11 @@ public class HammerPickaxeItem extends PickaxeItem {
     private static final UUID REACH_MODIFIER_ID = UUID.fromString("aaaa1111-2222-3333-4444-555566667777");
     private static final UUID CRIT_MODIFIER_ID = UUID.fromString("bbbb1111-2222-3333-4444-555566667777");
 
+    /**
+     * Constructs a new HammerPickaxeItem.
+     * @param material The tool material.
+     * @param settings The item settings.
+     */
     public HammerPickaxeItem(ToolMaterial material, Settings settings) {
         super(material, (int) STATS.getAttackDamageBonus(), STATS.getTotalAttackSpeed(), settings);
 
@@ -56,6 +65,11 @@ public class HammerPickaxeItem extends PickaxeItem {
         this.attributeModifiers = builder.build();
     }
 
+    /**
+     * Gets the attribute modifiers for this item.
+     * @param slot The equipment slot.
+     * @return The attribute modifiers.
+     */
     @Override
     public Multimap<EntityAttribute, EntityAttributeModifier> getAttributeModifiers(EquipmentSlot slot) {
         return slot == EquipmentSlot.MAINHAND ? this.attributeModifiers : super.getAttributeModifiers(slot);

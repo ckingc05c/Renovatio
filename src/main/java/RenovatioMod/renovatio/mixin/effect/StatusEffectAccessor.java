@@ -8,9 +8,15 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 import java.util.Map;
 
+/**
+ * This mixin provides access to private fields in the StatusEffect class.
+ */
 @Mixin(StatusEffect.class)
 public interface StatusEffectAccessor {
-    // This provides a "getter" for the private attributeModifiers map.
+    /**
+     * This provides a "getter" for the private attributeModifiers map.
+     * @return The map of attribute modifiers.
+     */
     @Accessor("attributeModifiers")
     Map<EntityAttribute, EntityAttributeModifier> getAttributeModifiers();
 }

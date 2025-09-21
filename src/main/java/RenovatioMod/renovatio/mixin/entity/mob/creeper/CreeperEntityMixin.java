@@ -13,13 +13,27 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+/**
+ * This mixin modifies the CreeperEntity class to change the explosion strength based on the current stage.
+ */
 @Mixin(CreeperEntity.class)
 public abstract class CreeperEntityMixin extends HostileEntity {
 
+    /**
+     * Constructs a new CreeperEntityMixin.
+     * @param entityType The entity type.
+     * @param world The world.
+     */
     protected CreeperEntityMixin(EntityType<? extends HostileEntity> entityType, World world) {
         super(entityType, world);
     }
 
+    /**
+     * Injects into the constructor of the CreeperEntity class to modify the explosion radius.
+     * @param entityType The entity type.
+     * @param world The world.
+     * @param ci The callback info.
+     */
     @Inject(method = "<init>", at = @At("TAIL"))
     private void onInit(EntityType<? extends CreeperEntity> entityType, World world, CallbackInfo ci) {
         // Only apply changes on the server

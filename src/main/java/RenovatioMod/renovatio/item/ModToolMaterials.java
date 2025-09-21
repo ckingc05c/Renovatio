@@ -8,6 +8,9 @@ import java.util.function.Supplier;
 
 import static RenovatioMod.renovatio.item.ModMaterialItems.*;
 
+/**
+ * This enum contains the tool materials for the mod.
+ */
 public enum ModToolMaterials implements ToolMaterial {
     // Values updated to match the table
     BLACKSTONE(131, 4.5F, 1.5F, 1, 10, () -> Ingredient.ofItems(Items.BLACKSTONE)),
@@ -33,6 +36,15 @@ public enum ModToolMaterials implements ToolMaterial {
     private final int enchantability;
     private final Supplier<Ingredient> repairIngredient;
 
+    /**
+     * Constructs a new ModToolMaterials.
+     * @param durability The durability of the tool.
+     * @param miningSpeed The mining speed of the tool.
+     * @param attackDamage The attack damage of the tool.
+     * @param miningLevel The mining level of the tool.
+     * @param enchantability The enchantability of the tool.
+     * @param repairIngredient The repair ingredient of the tool.
+     */
     ModToolMaterials(int durability, float miningSpeed, float attackDamage, int miningLevel, int enchantability, Supplier<Ingredient> repairIngredient) {
         this.durability = durability;
         this.miningSpeed = miningSpeed;
