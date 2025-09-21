@@ -1,4 +1,36 @@
 # Changelog
+## [1.0.5.45.6.21] - 2025-09-21
+### Changed
+- Updated **Resistance** damage reduction formula:
+    - Old formula: `20% * level` (Resistance I = 20%, II = 40%, etc.).
+    - New formula: `(0.80 ^ level)` (exponential scaling).
+        - Resistance I → 20% reduction (80% taken).
+        - Resistance II → 36% reduction (64% taken).
+        - Resistance III → ~49% reduction (51% taken).
+        - Resistance IV → ~59% reduction (41% taken).
+    - Prevents Resistance from granting full damage immunity at high levels.
+- Added stat tracking for resisted damage:
+    - **DAMAGE_RESISTED** for defenders with Resistance.
+    - **DAMAGE_DEALT_RESISTED** for attackers hitting a resistant target.
+## [1.0.5.45.6.20] - 2025-09-21
+- ### Removed
+- Reverted **Resistance** scaling Changes
+## [1.0.5.45.6.19] - 2025-09-21
+### Changed
+- Reworked **Armor Durability Formula**:
+    - New formula: `(toolDurability / 24) * pieceBaseValue + (160 / 3)`.
+    - Durability is now rounded to the nearest **4**.
+    - This change boosts the durability of lower-tier armors (like Iron and Copper) while keeping higher-tier armors (Diamond, Netherite) balanced.
+
+## [1.0.5.45.6.18] - 2025-09-19
+### Added
+- Added framework for **Under Armor Trinket Sets**.
+- Added **Damage Boost** effect, which increases attack damage using the formula: `4 + 2 * amplifier`.
+
+### Changed
+- Adjusted **Strength** effect: damage bonus changed from **+30% per level** to **+20% per level**.
+- Adjusted **Weakness** effect: damage reduction changed from **-40% per level** to **-30% per level**, with a maximum reduction of **-99%** at levels above 4.
+
 
 ## [1.0.5.45.6.12] - 2025-07-21
 ### Changed
@@ -39,6 +71,7 @@
   - **Strength** now increases attack damage by **+30% per level**.
   - **Weakness** now reduces attack damage by **-40% per level**.
 - **Strength** now also affects **ranged attacks**, not just melee.
+
 
 ## [1.0.5.44] - 2025-07-01
 ### Fixed

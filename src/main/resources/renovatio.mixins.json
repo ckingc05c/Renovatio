@@ -4,6 +4,7 @@
   "package": "RenovatioMod.renovatio.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "combat.LivingEntityToughnessMixin",
     "effect.DamageModifierStatusEffectMixin",
     "effect.StatusEffectAccessor",
     "effect.StatusEffectMixin",

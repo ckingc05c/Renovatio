@@ -18,12 +18,17 @@ public class DamageModifierStatusEffectMixin {
         int level = amplifier + 1;
 
         if (effect == StatusEffects.STRENGTH) {
-            // New formula: 30% increase per level
+            // New formula: 20% increase per level
             // We set the return value and cancel the original method.
-            cir.setReturnValue(0.30 * level);
+            cir.setReturnValue(0.20 * level);
         } else if (effect == StatusEffects.WEAKNESS) {
-            // New formula: -40% per level
-            cir.setReturnValue(-0.40 * level);
+            // New formula: -25% per level
+            if (level < 4){
+                cir.setReturnValue(-0.25 * level);
+            } else {
+                cir.setReturnValue(-0.99);
+            }
+
         }
     }
 }

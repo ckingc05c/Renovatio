@@ -19,12 +19,16 @@ public class UnderArmorChest extends TrinketItem {
         super(settings);
     }
 
+    @Override
     public Multimap<EntityAttribute, EntityAttributeModifier> getModifiers(ItemStack stack, SlotReference slot, LivingEntity entity, UUID uuid) {
         var modifiers = super.getModifiers(stack, slot, entity, uuid);
-        // +10% movement speed
-        modifiers.put(AttributesMod.MELEE_RESISTANCE, new EntityAttributeModifier(uuid, "puffish_attributes:melee_resistance", 0.1, EntityAttributeModifier.Operation.ADDITION));
-        // If the player has access to ring slots, this will give them an extra one
-        SlotAttributes.addSlotModifier(modifiers, "chest/underarmor_c", uuid, 1, EntityAttributeModifier.Operation.ADDITION);
+
+        // This correctly adds 10% melee resistance to the player
+        modifiers.put(AttributesMod.RESISTANCE, new EntityAttributeModifier(uuid, "puffish_attributes:resistance", 0.5, EntityAttributeModifier.Operation.MULTIPLY_BASE));
+
+        // This line was for adding extra slots and should be removed if you just want to add player stats.
+        // SlotAttributes.addSlotModifier(modifiers, "chest/underarmor_c", uuid, 1, EntityAttributeModifier.Operation.ADDITION);
+
         return modifiers;
     }
 }

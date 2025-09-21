@@ -1,25 +1,30 @@
 package RenovatioMod.renovatio.mixin.entity.player;
 
-import RenovatioMod.renovatio.effects.StageEffects;
+import RenovatioMod.renovatio.stage.effects.StageEffects;
 import RenovatioMod.renovatio.stage.Stage;
 import RenovatioMod.renovatio.stage.StageManager;
 import com.google.common.collect.ImmutableSet;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.damage.DamageType;
 import net.minecraft.entity.damage.DamageTypes;
+import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.tag.DamageTypeTags;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.stat.Stats;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Set;
 
@@ -95,13 +100,52 @@ public abstract class LivingEntityDamageMixin {
 
         // --- RESISTANCE CALCULATION ---
         // This is applied *after* the stage-based scaling.
+
+        /*
+
         if (this.hasStatusEffect(StatusEffects.RESISTANCE)) {
             int amplifier = this.getStatusEffect(StatusEffects.RESISTANCE).getAmplifier();
             float reduction = (amplifier + 1) * 0.15f; // Your new 15% formula
             reduction = Math.min(reduction, 1.0f); // Cap at 100%
             return stageModifiedAmount * (1.0f - reduction);
         }
-
+        */
         return stageModifiedAmount;
     }
+    @Inject(method = "modifyAppliedDamage", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/effect/StatusEffectInstance;getAmplifier()I", ordinal = 0), cancellable = true)
+    private void ResistanceCalculation(DamageSource source, float amount, CallbackInfoReturnable<Float> cir) {
+        LivingEntity entity = (LivingEntity) (Object) this;
+        StatusEffectInstance resistance = entity.getStatusEffect(StatusEffects.RESISTANCE);
+
+        if (resistance != null && !source.isIn(DamageTypeTags.BYPASSES_RESISTANCE)) {
+            int effectLevel = resistance.getAmplifier() + 1;
+
+            float multiplier;            if (effectLevel > 255) {
+                // Beyond vanilla cap, treat as full immunity
+                multiplier = 0.0F;
+            } else {
+                multiplier = (float) Math.pow(0.80F, effectLevel);
+            }
+            // Damage actually applied
+            float finalDamage = amount * multiplier;
+
+            // Damage resisted (the prevented portion)
+            float resistedDamage = amount - finalDamage;
+
+            // Update stats if resistedDamage is sane
+            if (resistedDamage > 0.0F && resistedDamage < Float.MAX_VALUE) {
+                if (entity instanceof ServerPlayerEntity player) {
+                    // Player resisting damage
+                    player.increaseStat(Stats.DAMAGE_RESISTED, Math.round(resistedDamage * 10.0F));
+                } else if (source.getAttacker() instanceof ServerPlayerEntity attacker) {
+                    // Player dealing resisted damage
+                    attacker.increaseStat(Stats.DAMAGE_DEALT_RESISTED, Math.round(resistedDamage * 10.0F));
+                }
+            }
+
+            // Ensure we never return a negative damage value
+            cir.setReturnValue(Math.max(finalDamage, 0.0F));
+        }
+    }
+
 }

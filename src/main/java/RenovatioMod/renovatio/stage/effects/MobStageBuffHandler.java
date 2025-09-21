@@ -1,4 +1,4 @@
-package RenovatioMod.renovatio.effects;
+package RenovatioMod.renovatio.stage.effects;
 
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.minecraft.entity.LivingEntity;

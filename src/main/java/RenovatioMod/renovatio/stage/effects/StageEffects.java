@@ -1,4 +1,4 @@
-package RenovatioMod.renovatio.effects;
+package RenovatioMod.renovatio.stage.effects;
 
 import RenovatioMod.renovatio.stage.Stage;
 import com.ibm.icu.impl.CacheValue;

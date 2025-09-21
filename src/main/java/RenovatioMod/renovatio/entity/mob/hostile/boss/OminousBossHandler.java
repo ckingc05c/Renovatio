@@ -1,4 +1,4 @@
-package RenovatioMod.renovatio.boss;
+package RenovatioMod.renovatio.entity.mob.hostile.boss;
 
 import RenovatioMod.renovatio.stage.Stage;
 import RenovatioMod.renovatio.stage.StageManager;

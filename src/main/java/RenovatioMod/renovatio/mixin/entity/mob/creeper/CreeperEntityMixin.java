@@ -1,6 +1,6 @@
 package RenovatioMod.renovatio.mixin.entity.mob.creeper;
 
-import RenovatioMod.renovatio.effects.StageEffects;
+import RenovatioMod.renovatio.stage.effects.StageEffects;
 import RenovatioMod.renovatio.stage.Stage;
 import RenovatioMod.renovatio.stage.StageManager;
 import net.minecraft.entity.EntityType;

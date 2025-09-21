@@ -31,6 +31,7 @@
     "fabricloader": ">=${loader_version}",
     "fabric": "*",
     "minecraft": "${minecraft_version}",
+    "trinkets": ">=3.7.2",
     "reach-entity-attributes": "*",
     "puffish_attributes": "0.7.4"
   }
