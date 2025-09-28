@@ -1,0 +1,9 @@
+{
+  "comments": [
+    "Damage types in this tag are a result of a Toughness or Weakness Break."
+  ],
+  "values": [
+    "renovatio:toughness_break",
+    "renovatio:weakness_break"
+  ]
+}

@@ -1,4 +1,8 @@
 {
+  "death.attack.toughness_break": "%1$s's defenses were shattered",
+  "death.attack.toughness_break.player": "%1$s's defenses were shattered by %2$s",
+  "death.attack.weakness_break": "%1$s was broken by elemental weakness",
+  "death.attack.weakness_break.player": "%1$s was broken by elemental weakness from %2$s",
   "item.renovatio.refined_iron_sword": "Refined Iron Sword",
   "item.renovatio.refined_iron_longsword": "Refined Iron Longsword",
   "item.renovatio.refined_iron_shortsword": "Refined Iron Shortsword",

@@ -1,7 +1,7 @@
 package RenovatioMod.renovatio.client;
 
 import RenovatioMod.renovatio.client.screen.ExtendedCraftingScreen; // Add this import
-import RenovatioMod.renovatio.screen.ModScreenHandlers; // Add this import
+import ckingc05c.renovatio.screen.ModScreenHandlers; // Add this import
 import net.fabricmc.api.ClientModInitializer;
 import net.minecraft.client.gui.screen.ingame.HandledScreens; // Add this import
 

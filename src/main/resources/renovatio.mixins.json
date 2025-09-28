@@ -1,7 +1,7 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "RenovatioMod.renovatio.mixin",
+  "package": "ckingc05c.renovatio.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "combat.LivingEntityToughnessMixin",
@@ -12,7 +12,9 @@
     "entity.mob.creeper.CreeperEntityMixin",
     "entity.player.LivingEntityDamageMixin",
     "item.ItemAccessor",
-    "item.tool.ToolMaterialsMixin"
+    "item.tool.ToolMaterialsMixin",
+    "entity.LivingEntityAttributesMixin",
+    "entity.player.ServerPlayerEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1

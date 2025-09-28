@@ -11,13 +11,13 @@
   "environment": "*",
   "entrypoints": {
     "fabric-datagen": [
-      "RenovatioMod.renovatio.client.RenovatioDataGenerator"
+      "ckingc05c.renovatio.datagen.RenovatioDataGenerator"
     ],
     "client": [
       "RenovatioMod.renovatio.client.RenovatioClient"
     ],
     "main": [
-      "RenovatioMod.renovatio.Renovatio"
+      "ckingc05c.renovatio.Renovatio"
     ]
   },
   "mixins": [

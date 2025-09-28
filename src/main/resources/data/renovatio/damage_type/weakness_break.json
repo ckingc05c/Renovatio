@@ -1,0 +1,9 @@
+{
+  "message_id": "weakness_break",
+  "exhaustion": 0.1,
+  "scaling": "when_caused_by_living_non_player",
+  "effects": "soul",
+  "death_message_type": "default",
+  "bypasses_armor": true,
+  "bypasses_enchantments": true
+}

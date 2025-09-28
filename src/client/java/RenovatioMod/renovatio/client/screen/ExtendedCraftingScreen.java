@@ -1,7 +1,7 @@
 package RenovatioMod.renovatio.client.screen;
 
-import RenovatioMod.renovatio.Renovatio;
-import RenovatioMod.renovatio.screen.ExtendedCraftingScreenHandler;
+import ckingc05c.renovatio.Renovatio;
+import ckingc05c.renovatio.screen.ExtendedCraftingScreenHandler;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
