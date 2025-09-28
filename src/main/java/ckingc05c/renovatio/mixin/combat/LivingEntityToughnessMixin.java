@@ -1,6 +1,7 @@
 package ckingc05c.renovatio.mixin.combat;
 
 import ckingc05c.renovatio.combat.toughness.ToughnessEntity;
+import ckingc05c.renovatio.combat.toughness.ToughnessEntityManager; // Import the manager
 import ckingc05c.renovatio.combat.toughness.ToughnessManager;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.nbt.NbtCompound;
@@ -14,13 +15,15 @@ public class LivingEntityToughnessMixin {
 
     @Inject(method = "writeCustomDataToNbt", at = @At("TAIL"))
     private void writeToughnessToNbt(NbtCompound nbt, CallbackInfo ci) {
-        ToughnessEntity toughnessEntity = new ToughnessEntity((LivingEntity)(Object)this);
+        // Get the managed instance instead of creating a new one
+        ToughnessEntity toughnessEntity = ToughnessEntityManager.get((LivingEntity)(Object)this);
         ToughnessManager.writeNbt(toughnessEntity, nbt);
     }
 
     @Inject(method = "readCustomDataFromNbt", at = @At("TAIL"))
     private void readToughnessFromNbt(NbtCompound nbt, CallbackInfo info) {
-        ToughnessEntity toughnessEntity = new ToughnessEntity((LivingEntity)(Object)this);
+        // Get the managed instance here as well
+        ToughnessEntity toughnessEntity = ToughnessEntityManager.get((LivingEntity)(Object)this);
         ToughnessManager.readNbt(toughnessEntity, nbt);
     }
 }

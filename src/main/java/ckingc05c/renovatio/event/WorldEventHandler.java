@@ -1,6 +1,7 @@
 package ckingc05c.renovatio.event;
 
 import ckingc05c.renovatio.combat.toughness.ToughnessEntity;
+import ckingc05c.renovatio.combat.toughness.ToughnessEntityManager;
 import ckingc05c.renovatio.combat.toughness.ToughnessManager;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import ckingc05c.renovatio.stage.StageManager;
@@ -22,7 +23,7 @@ public class WorldEventHandler {
             // We check if the current game tick is a multiple of 20 (1 second)
             if (world.getTime() % 20 == 0) {
                 world.getPlayers().forEach(player -> {
-                    ToughnessEntity toughnessPlayer = new ToughnessEntity(player);
+                    ToughnessEntity toughnessPlayer = ToughnessEntityManager.get(player);
                     if (ToughnessManager.canRegenerate(toughnessPlayer)) {
                         ToughnessManager.regenerate(toughnessPlayer);
                     }

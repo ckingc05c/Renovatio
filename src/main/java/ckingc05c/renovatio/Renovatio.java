@@ -3,6 +3,7 @@ package ckingc05c.renovatio;
 import ckingc05c.renovatio.attribute.ModAttributes;
 import ckingc05c.renovatio.block.ModBlocks;
 import ckingc05c.renovatio.combat.toughness.ToughnessEntity;
+import ckingc05c.renovatio.combat.toughness.ToughnessEntityManager;
 import ckingc05c.renovatio.combat.toughness.ToughnessManager;
 import ckingc05c.renovatio.command.GetStatsCommand;
 import ckingc05c.renovatio.effect.status.ModStatusEffect;
@@ -73,8 +74,8 @@ public class Renovatio implements ModInitializer {
         ServerEntityEvents.ENTITY_LOAD.register((entity, world) -> {
             if (!(entity instanceof LivingEntity living)) return;
 
-            ToughnessEntity livingTougnhess = new ToughnessEntity(living);
-            ToughnessManager.initializeToughness(livingTougnhess);
+            ToughnessEntity livingToughness = ToughnessEntityManager.get(living);
+            ToughnessManager.initializeToughness(livingToughness);
             if (entity instanceof WitherEntity ||
                     entity instanceof EnderDragonEntity ||
                     entity instanceof ElderGuardianEntity ||
@@ -83,6 +84,11 @@ public class Renovatio implements ModInitializer {
                 if (OminousBossHandler.shouldApplyOminous(living)) {
                     OminousBossHandler.applyOminousModifiers(living);
                 }
+            }
+        });
+        ServerEntityEvents.ENTITY_UNLOAD.register((entity, world) -> {
+            if (entity instanceof LivingEntity living) {
+                ToughnessEntityManager.remove(living);
             }
         });
     }

@@ -2,6 +2,7 @@ package ckingc05c.renovatio.command;
 
 import ckingc05c.renovatio.attribute.ModAttributes;
 import ckingc05c.renovatio.combat.toughness.ToughnessEntity;
+import ckingc05c.renovatio.combat.toughness.ToughnessEntityManager;
 import ckingc05c.renovatio.combat.toughness.ToughnessManager;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
@@ -35,7 +36,7 @@ public class GetStatsCommand {
             source.sendError(Text.literal("Target is not a living entity and does not have stats."));
             return 0;
         }
-        ToughnessEntity toughnessEntity = new ToughnessEntity(livingTarget);
+        ToughnessEntity toughnessEntity = ToughnessEntityManager.get(livingTarget);
 
         // --- Health ---
         float currentHealth = livingTarget.getHealth();

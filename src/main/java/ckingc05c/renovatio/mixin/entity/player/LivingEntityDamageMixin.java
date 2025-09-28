@@ -2,6 +2,7 @@ package ckingc05c.renovatio.mixin.entity.player;
 
 import ckingc05c.renovatio.combat.ModDamageTypes;
 import ckingc05c.renovatio.combat.toughness.ToughnessEntity;
+import ckingc05c.renovatio.combat.toughness.ToughnessEntityManager;
 import ckingc05c.renovatio.combat.toughness.ToughnessManager;
 import ckingc05c.renovatio.stage.effects.StageEffects;
 import ckingc05c.renovatio.stage.Stage;
@@ -79,7 +80,7 @@ public abstract class LivingEntityDamageMixin {
     private float modifyDamage(float amount, DamageSource source) {
         LivingEntity target = (LivingEntity) (Object) this;
 
-        ToughnessEntity targetToughness = new ToughnessEntity(target);
+        ToughnessEntity targetToughness = ToughnessEntityManager.get(target);
 
         if (target.getWorld().isClient()) {
             return amount;
@@ -167,7 +168,7 @@ public abstract class LivingEntityDamageMixin {
     private void ResistanceCalculation(DamageSource source, float amount, CallbackInfoReturnable<Float> cir) {
         LivingEntity entity = (LivingEntity) (Object) this;
         StatusEffectInstance resistance = entity.getStatusEffect(StatusEffects.RESISTANCE);
-        ToughnessEntity toughnessEntity = new ToughnessEntity(entity);
+        ToughnessEntity toughnessEntity = ToughnessEntityManager.get(entity);
 
         if (resistance != null && !source.isIn(DamageTypeTags.BYPASSES_RESISTANCE)) {
             float baseResistanceModifer = toughnessEntity.getToughnessState().getResistanceScaling();

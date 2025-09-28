@@ -2,6 +2,7 @@ package ckingc05c.renovatio.mixin.entity.player;
 
 import ckingc05c.renovatio.attribute.ModAttributes;
 import ckingc05c.renovatio.combat.toughness.ToughnessEntity;
+import ckingc05c.renovatio.combat.toughness.ToughnessEntityManager;
 import ckingc05c.renovatio.combat.toughness.ToughnessManager;
 import com.mojang.authlib.GameProfile;
 import net.minecraft.entity.player.PlayerEntity;
@@ -27,7 +28,7 @@ public abstract class ServerPlayerEntityMixin extends PlayerEntity {
             // Reset their current toughness to its maximum value.
             float maxToughness = (float) this.getAttributeValue(ModAttributes.GENERIC_MAX_TOUGHNESS);
 
-            ToughnessManager.setToughness(new ToughnessEntity(this), maxToughness);
+            ToughnessManager.setToughness(ToughnessEntityManager.get(this), maxToughness);
         }
     }
 }
