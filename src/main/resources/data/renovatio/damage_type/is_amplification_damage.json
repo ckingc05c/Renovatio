@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "renovatio:amplification_damage",
+    "renovatio:magnetic_damage",
+    "renovatio:metal_damage"
+  ]
+}

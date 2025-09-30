@@ -2,6 +2,8 @@ package ckingc05c.renovatio.combat.toughness;
 
 import ckingc05c.renovatio.Renovatio;
 import ckingc05c.renovatio.attribute.ModAttributes;
+import ckingc05c.renovatio.combat.DamageMultiplier;
+import ckingc05c.renovatio.combat.ElementalDamage;
 import ckingc05c.renovatio.combat.ModDamageTypes;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -15,7 +17,9 @@ import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.World;
 
+import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * A wrapper class that associates a {@link LivingEntity} with its current {@link ToughnessState}.
@@ -30,6 +34,8 @@ public class ToughnessEntity {
 
     /** The entity's current toughness state. */
     private ToughnessState toughnessState;
+
+    private final Map<ElementalDamage, DamageMultiplier> weaknesses = new ConcurrentHashMap<>();
 
     /**
      * Constructs a new {@code ToughnessEntity} for the given entity.
@@ -54,6 +60,7 @@ public class ToughnessEntity {
         } else {
             this.toughnessState = ToughnessState.UNBROKEN;
         }
+        addWeakness(ElementalDamage.LAVA, DamageMultiplier.MAJOR_WEAKNESS);
     }
 
     public boolean isBoss(){
@@ -73,6 +80,23 @@ public class ToughnessEntity {
     /** @return The current {@link ToughnessState}. */
     public ToughnessState getToughnessState() {
         return toughnessState;
+    }
+
+    /**
+     * Gets the map of elemental weaknesses for this entity.
+     * @return The entity's weakness map.
+     */
+    public Map<ElementalDamage, DamageMultiplier> getWeaknesses() {
+        return weaknesses;
+    }
+
+    /**
+     * Sets a weakness for the entity.
+     * @param element The element the entity is weak to.
+     * @param multiplier The damage multiplier for this weakness.
+     */
+    public void addWeakness(ElementalDamage element, DamageMultiplier multiplier) {
+        weaknesses.put(element, multiplier);
     }
 
     /**

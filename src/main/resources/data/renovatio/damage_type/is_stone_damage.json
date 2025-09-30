@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "renovatio:stone_damage",
+    "renovatio:lava_damage",
+    "renovatio:magnetic_damage",
+    "renovatio:earth_damage",
+    "renovatio:metal_damage"
+  ]
+}

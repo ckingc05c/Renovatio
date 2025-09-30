@@ -4,17 +4,18 @@
   "package": "ckingc05c.renovatio.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "block.entity.BeaconBlockEntityMixin",
     "combat.LivingEntityToughnessMixin",
     "effect.DamageModifierStatusEffectMixin",
     "effect.StatusEffectAccessor",
     "effect.StatusEffectMixin",
+    "entity.LivingEntityAttributesMixin",
     "entity.mob.creeper.CreeperEntityAccessor",
     "entity.mob.creeper.CreeperEntityMixin",
     "entity.player.LivingEntityDamageMixin",
+    "entity.player.ServerPlayerEntityMixin",
     "item.ItemAccessor",
-    "item.tool.ToolMaterialsMixin",
-    "entity.LivingEntityAttributesMixin",
-    "entity.player.ServerPlayerEntityMixin"
+    "item.tool.ToolMaterialsMixin"
   ],
   "injectors": {
     "defaultRequire": 1

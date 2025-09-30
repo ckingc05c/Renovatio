@@ -3,6 +3,8 @@ package ckingc05c.renovatio.event;
 import ckingc05c.renovatio.combat.toughness.ToughnessEntity;
 import ckingc05c.renovatio.combat.toughness.ToughnessEntityManager;
 import ckingc05c.renovatio.combat.toughness.ToughnessManager;
+import ckingc05c.renovatio.combat.toughness.ToughnessState;
+import ckingc05c.renovatio.effect.status.ModStatusEffect;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import ckingc05c.renovatio.stage.StageManager;
 import ckingc05c.renovatio.stage.Stage;
@@ -29,6 +31,22 @@ public class WorldEventHandler {
                     }
                 });
             }
+            // --- Toughness State Check ---
+
+            world.getPlayers().forEach(player -> {
+                ToughnessEntity toughnessPlayer = ToughnessEntityManager.get(player);
+
+                if (player.hasStatusEffect(ModStatusEffect.FORTIFICATION_EFFECT)) {
+                    toughnessPlayer.setToughnessState(ToughnessState.FORTIFIED);
+                } else if (toughnessPlayer.getToughnessState() == ToughnessState.FORTIFIED) {
+                    // Revert to unbroken if fortification expires
+                    toughnessPlayer.setToughnessState(ToughnessState.UNBROKEN);
+                }
+
+                if (ToughnessManager.canRegenerate(toughnessPlayer)) {
+                    ToughnessManager.regenerate(toughnessPlayer);
+                }
+            });
 
             // --- Stage and Blood Moon Logic ---
             StageManager.checkAndUpdate(world);

@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "renovatio:light_damage",
+    "renovatio:divine_damage"
+  ]
+}

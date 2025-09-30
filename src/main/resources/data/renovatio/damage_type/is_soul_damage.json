@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "renovatio:soul_damage",
+    "renovatio:decay_damage"
+  ]
+}

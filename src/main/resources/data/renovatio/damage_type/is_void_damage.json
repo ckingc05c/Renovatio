@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "renovatio:void_damage",
+    "renovatio:abyss_damage",
+    "renovatio:havoc_damage"
+  ]
+}

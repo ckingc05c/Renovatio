@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "renovatio:dark_damage",
+    "renovatio:abyss_damage",
+    "renovatio:havoc_damage",
+    "renovatio:decay_damage"
+  ]
+}

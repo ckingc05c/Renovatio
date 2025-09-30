@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "renovatio:explosion_damage",
+    "renovatio:combustion_damage",
+    "renovatio:overcharge_damage"
+  ]
+}

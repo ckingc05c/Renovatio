@@ -1,5 +1,7 @@
 package ckingc05c.renovatio.mixin.entity.player;
 
+import ckingc05c.renovatio.combat.ElementalDamage;
+import ckingc05c.renovatio.combat.ElementalDamageHelper;
 import ckingc05c.renovatio.combat.ModDamageTypes;
 import ckingc05c.renovatio.combat.toughness.ToughnessEntity;
 import ckingc05c.renovatio.combat.toughness.ToughnessEntityManager;
@@ -79,7 +81,6 @@ public abstract class LivingEntityDamageMixin {
     @ModifyVariable(method = "damage", at = @At("HEAD"), argsOnly = true)
     private float modifyDamage(float amount, DamageSource source) {
         LivingEntity target = (LivingEntity) (Object) this;
-
         ToughnessEntity targetToughness = ToughnessEntityManager.get(target);
 
         if (target.getWorld().isClient()) {
@@ -88,59 +89,24 @@ public abstract class LivingEntityDamageMixin {
         ToughnessManager.recordDamage(targetToughness);
         float initialAttackPower = amount;
 
-        // --- STAGE-BASED DAMAGE SCALING (Players Only) ---
         if (target instanceof PlayerEntity) {
             initialAttackPower *= (float) getMultiplier(source, StageManager.get((ServerWorld) target.getWorld()).getStage());
         }
-        // --- NEW: Check for Break Damage Types ---
+
         RegistryKey<DamageType> damageTypeKey = source.getTypeRegistryEntry().getKey().orElse(null);
-        if (damageTypeKey != null &&
-                (damageTypeKey.equals(ModDamageTypes.TOUGHNESS_BREAK) || damageTypeKey.equals(ModDamageTypes.WEAKNESS_BREAK))) {
-            // If this is a break attack, it bypasses all toughness calculations.
+        if (damageTypeKey != null && (damageTypeKey.equals(ModDamageTypes.TOUGHNESS_BREAK) || damageTypeKey.equals(ModDamageTypes.WEAKNESS_BREAK))) {
             return initialAttackPower;
         }
-        return ToughnessManager.handleDamage(targetToughness, initialAttackPower, source);
-        /*
-        // --- TOUGHNESS AND DAMAGE LAYERS ---
-        float currentToughness = ToughnessManager.getToughness(targetToughness);
-        float damageToHealth = initialAttackPower; // By default, health takes 100% of the damage
 
-        if (currentToughness > 0) {
-            StatusEffectInstance resistance = target.getStatusEffect(StatusEffects.RESISTANCE);
-            boolean hasValidResistance = resistance != null && !source.isIn(DamageTypeTags.BYPASSES_RESISTANCE);
-            float effectiveToughness = currentToughness;
-
-            // Each level of Resistance increases effectiveToughness by 20%
-            if (hasValidResistance) {
-                int effectLevel = resistance.getAmplifier() + 1;
-                effectiveToughness *= (1 + (effectLevel * 0.2f));
-            }
-
-            // If the shield can absorb the full hit
-            if (effectiveToughness >= initialAttackPower) {
-                float toughnessDamage = initialAttackPower;
-                float healthDamageMultiplier = 0.9f; // Base 90% damage reduction
-
-                if (hasValidResistance) {
-                    int effectLevel = resistance.getAmplifier() + 1;
-                    // Resistance reduces damage taken by Toughness
-                    toughnessDamage *= (float) Math.pow(0.80f, effectLevel);
-                    // Resistance also reduces the passthrough damage to health
-                    healthDamageMultiplier -= (effectLevel * 0.05f);
-                }
-
-                ToughnessManager.setToughness(targetToughness, currentToughness - toughnessDamage);
-                damageToHealth = initialAttackPower * Math.max(0, healthDamageMultiplier);
-
-            } else { // If the shield breaks on this hit
-                ToughnessManager.setToughness(targetToughness, 0);
-                damageToHealth = initialAttackPower;
-                ToughnessManager.handleBreak(targetToughness, source);
-            }
+        // --- NEW: Elemental Damage Calculation ---
+        float elementalMultiplier = 1.0f;
+        ElementalDamage elementalType = ElementalDamage.getFromRegistryKey(damageTypeKey);
+        if (elementalType != null) {
+            elementalMultiplier = ElementalDamageHelper.getDamageMultiplier(targetToughness, elementalType);
         }
-         return damageToHealth;
-        */
 
+        // Pass the multiplier to the ToughnessManager
+        return ToughnessManager.handleDamage(targetToughness, initialAttackPower, source, elementalMultiplier);
     }
 
     @Unique
