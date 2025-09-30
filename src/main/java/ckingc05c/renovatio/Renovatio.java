@@ -44,6 +44,8 @@ public class Renovatio implements ModInitializer {
      */
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
+
+
     /**
      * This method is called by Fabric when the mod is initialized.
      * It registers all the mod's content and sets up event listeners.

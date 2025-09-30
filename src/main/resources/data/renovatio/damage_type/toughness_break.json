@@ -1,9 +1,0 @@
-{
-  "message_id": "toughness_break",
-  "exhaustion": 0.1,
-  "scaling": "never",
-  "effects": "thorns",
-  "death_message_type": "default",
-  "bypasses_armor": true,
-  "bypasses_enchantments": true
-}
