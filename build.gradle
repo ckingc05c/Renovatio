@@ -22,12 +22,7 @@ loom {
 }
 
 fabricApi {
-    configureDataGeneration {
-        // This was incomplete. It now includes server data.
-        client = true
-        server = true
-        all = true
-    }
+    configureDataGeneration ()
 }
 def localFakerLib = findProject(':FakerLib') != null
 def localAttributes = findProject(':ZenithAttributes') != null
