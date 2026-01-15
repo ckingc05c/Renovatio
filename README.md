@@ -1,29 +1,56 @@
 # Renovatio
 
-Renovatio is a progression-based Minecraft mod that enhances gameplay by introducing a stage-based difficulty system, new equipment, and more powerful "Ominous" versions of bosses. The mod aims to provide a challenging and rewarding experience for players who are looking for a fresh take on Minecraft's progression.
+Renovatio is a Fabric mod for Minecraft 1.20.1 that focuses on combat and attribute rebalancing. The project uses mixins to tune entity toughness, damage calculations, status effects, creeper behavior, tool materials, and player attribute handling. It also includes a data generator entrypoint for producing mod data assets during development. The repository currently contains the build tooling and resource configuration needed to assemble the mod.
 
-## Features
+## Highlights
 
-*   **Stage-Based Difficulty:** The world's difficulty progresses through stages, with mobs becoming more powerful as the stage increases.
-*   **New Equipment:** A wide range of new tools, weapons, and armor to help you face the increasing challenges.
-*   **Ominous Bosses:** Vanilla bosses like the Wither and Ender Dragon can spawn as "Ominous" variants with enhanced abilities and stats.
-*   **Custom Crafting:** New crafting stations and recipes to create the mod's unique equipment.
+- **Mixin-driven gameplay tweaks:** Mixins target combat, status effects, mob behavior, tool materials, and player attribute logic. See the mixin configuration files for the full list of applied mixins.
+- **Fabric data generation:** Includes a Fabric data generation entrypoint for producing data assets.
+- **Attribute-focused dependencies:** Pulls in libraries such as AdditionalEntityAttributes, Reach Entity Attributes, Puffish Attributes, and Trinkets to support richer stat systems.
 
-## Setup
+## Requirements
 
-To build the mod from the source, follow these steps:
+- Java 17
+- Minecraft 1.20.1
+- Fabric Loader (see `gradle.properties` for the exact loader version)
 
-1.  Clone the repository: `git clone <repository-url>`
-2.  Navigate to the project directory: `cd renovatio`
-3.  Build the mod using Gradle: `./gradlew build`
+## Mod Dependencies
 
-The compiled `.jar` file will be located in the `build/libs/` directory.
+The Gradle build declares the following runtime/mod dependencies:
 
-## Usage
+- Fabric API
+- Reach Entity Attributes
+- AdditionalEntityAttributes
+- Ranged Weapon API
+- Puffish Attributes
+- Trinkets
 
-The mod's progression is tied to a "stage" system, which affects the difficulty of mobs and the availability of certain equipment. You can use the following command to interact with the stage system:
+Refer to `build.gradle` and `gradle.properties` for exact versions.
 
-*   `/stage get`: Displays the current stage.
-*   `/stage set <stage>`: Sets the current stage to the specified value. (Requires operator privileges)
+## Project Layout
 
-As you progress through the stages, you will encounter more challenging enemies, but you will also gain access to more powerful gear to help you on your journey. Good luck!
+- `src/main/resources/fabric.mod.json`: Core Fabric metadata, entrypoints, and dependencies.
+- `src/main/resources/renovatio.mixins.json`: Server/common mixin configuration list.
+- `src/client/resources/renovatio.client.mixins.json`: Client mixin configuration list.
+- `build.gradle`: Gradle build configuration and dependency declarations.
+
+## Building
+
+```bash
+./gradlew build
+```
+
+The compiled `.jar` will be located in `build/libs/`.
+
+## Data Generation
+
+Run Fabric data generation with:
+
+```bash
+./gradlew runDatagen
+```
+
+## Notes
+
+- The mod is currently marked as `All-Rights-Reserved` in `fabric.mod.json`.
+- If you add new mixins, update the appropriate mixin JSON file and keep the package paths in sync.
